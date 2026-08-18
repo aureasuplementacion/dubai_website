@@ -1,0 +1,1 @@
+export default function AdminDashboardPage() { return <main className="container-shell py-16"><p className="text-xs uppercase tracking-[.24em] text-champagne">Admin</p><h1 className="mt-3 font-display text-5xl text-sapphire">Dashboard</h1><p className="mt-4 text-muted">Estructura preparada para solicitudes, catálogo y agenda.</p></main>; }
