@@ -1,4 +1,9 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-const services = ["Ritual facial luminoso", "Masaje bienestar", "Experiencia corporal", "Cuidado de manos"];
-export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) { const { locale } = await params; const t = await getTranslations("Services"); return <main className="container-shell py-16"><Link className="text-sm text-sapphire" href={`/${locale}`}>← Aura Estética</Link><p className="mt-16 text-xs uppercase tracking-[.24em] text-champagne">Aura Estética</p><h1 className="mt-4 font-display text-5xl text-sapphire">{t("title")}</h1><p className="mt-4 max-w-xl text-lg text-muted">{t("description")}</p><div className="mt-12 grid gap-5 md:grid-cols-2">{services.map((name, index) => <article key={name} className="rounded-2xl border border-border p-6"><div className="h-40 rounded-xl bg-gradient-to-br from-champagne-light to-surface"/><p className="mt-6 text-xs uppercase tracking-wider text-champagne">{index % 2 ? "Cuidado personal" : "Tratamiento facial"}</p><h2 className="mt-2 font-display text-2xl text-sapphire">{name}</h2><div className="mt-6 flex justify-between text-sm text-muted"><span>60 min</span><span>€95</span></div></article>)}</div></main>; }
+import { CatalogBrowser } from "@/components/catalog/catalog-browser";
+
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations("Services");
+  return <main className="container-shell py-16"><Link className="text-sm text-sapphire" href={`/${locale}`}>← Aura Estética</Link><div className="mt-16 max-w-2xl"><p className="text-xs uppercase tracking-[.24em] text-champagne">Aura Estética</p><h1 className="mt-4 font-display text-5xl text-sapphire">{t("title")}</h1><p className="mt-4 text-lg leading-8 text-muted">{t("description")}</p></div><CatalogBrowser /></main>;
+}
