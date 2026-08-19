@@ -5,12 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        sapphire: { DEFAULT: "#12395B", dark: "#0B263D" },
-        champagne: { DEFAULT: "#C8A96B", light: "#F2E9D7" },
-        ink: "#17212B", muted: "#5D6874", surface: "#F7F9FC", border: "#DCE3EA"
+        sapphire: { DEFAULT: "var(--color-brand-primary)", dark: "var(--color-brand-primary-strong)" },
+        champagne: { DEFAULT: "var(--color-brand-accent)", light: "var(--color-brand-accent-soft)" },
+        ink: "var(--color-text-primary)", muted: "var(--color-text-secondary)", surface: "var(--color-bg-subtle)", border: "var(--color-border)",
+        success: "var(--color-success)", warning: "var(--color-warning)", danger: "var(--color-danger)", info: "var(--color-info)"
       },
       fontFamily: { display: ["var(--font-display)", "serif"], sans: ["var(--font-sans)", "sans-serif"] },
-      boxShadow: { soft: "0 20px 60px rgba(18, 57, 91, 0.10)" }
+      boxShadow: { soft: "var(--shadow-soft)" },
+      transitionTimingFunction: { standard: "var(--motion-standard)" },
+      transitionDuration: { fast: "120ms", base: "180ms", slow: "320ms" }
     }
   },
   plugins: []

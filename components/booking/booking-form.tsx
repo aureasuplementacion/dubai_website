@@ -1,31 +1,25 @@
 "use client";
 
-import Link from "next/link";
+import { useActionState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { services } from "@/lib/catalog/data";
-import { submitBooking, type BookingActionResult } from "@/lib/actions/booking";
-import { bookingSchema, type BookingInput } from "@/lib/validations";
+import { submitLead, type LeadActionResult } from "@/lib/actions/leads";
+import { specialties } from "@/lib/catalog/data";
+import { Button } from "@/components/ui/button";
 
-export function BookingForm({ defaultService }: { defaultService?: string }) {
-  const locale = useLocale() as "es" | "en";
-  const t = useTranslations("Booking");
-  const [result, setResult] = useState<Extract<BookingActionResult, { ok: true }> | null>(null);
-  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<BookingInput>({ resolver: zodResolver(bookingSchema), defaultValues: { service: defaultService ?? "", transport: false, consent: false, message: "", honeypot: "" } });
-  const today = new Date().toISOString().slice(0, 10);
+const initialState: LeadActionResult | null = null;
 
-  async function onSubmit(values: BookingInput) {
-    const formData = new FormData(document.querySelector("form") as HTMLFormElement);
-    formData.set("website", values.honeypot ?? "");
-    const response = await submitBooking(formData);
-    if (response.ok) setResult(response);
-    else if (response.fieldErrors) Object.entries(response.fieldErrors).forEach(([field, messages]) => { if (messages?.[0]) setError(field as keyof BookingInput, { message: messages[0] }); });
-  }
-
-  if (result) return <section className="rounded-[2rem] bg-sapphire p-8 text-white shadow-soft md:p-12"><p className="text-xs uppercase tracking-[.24em] text-champagne">{t("eyebrow")}</p><h1 className="mt-5 font-display text-4xl">{t("successTitle")}</h1><p className="mt-5 max-w-xl leading-7 text-white/75">{t("successDescription")}</p><div className="mt-8 rounded-2xl bg-white/10 p-5"><p className="text-sm text-white/70">{t("summary")}</p><p className="mt-2 font-semibold">{result.data.service}</p><p className="mt-1 text-sm text-white/75">{result.data.date} · {result.data.time} · {result.data.name}</p><p className="mt-3 text-xs uppercase tracking-wider text-champagne">{result.reference}</p></div><div className="mt-8 flex flex-wrap gap-4"><Link href={`/${locale}`} className="rounded-full bg-white px-6 py-3 font-semibold text-sapphire">{t("backHome")}</Link><a href="https://wa.me/971500000000" className="rounded-full border border-white/40 px-6 py-3 font-semibold text-white">{t("whatsapp")}</a></div></section>;
-
-  const fieldClass = "mt-2 min-h-12 w-full rounded-xl border border-border bg-white px-4 text-ink outline-none transition focus:border-sapphire focus:ring-2 focus:ring-champagne/40";
-  return <form onSubmit={handleSubmit(onSubmit)} className="rounded-[2rem] border border-border bg-white p-6 shadow-soft md:p-10" noValidate><div className="grid gap-7 md:grid-cols-2"><div><label htmlFor="service" className="text-sm font-semibold text-ink">{t("service")}</label><select id="service" className={fieldClass} {...register("service")}><option value="">{t("chooseService")}</option>{services.map((service) => <option key={service.slug} value={service.slug}>{service.name[locale]}</option>)}</select>{errors.service && <p className="mt-2 text-sm text-danger">{t("required")}</p>}</div><div><label htmlFor="date" className="text-sm font-semibold text-ink">{t("date")}</label><input id="date" type="date" min={today} className={fieldClass} {...register("date")} />{errors.date && <p className="mt-2 text-sm text-danger">{t("required")}</p>}</div><div><label htmlFor="time" className="text-sm font-semibold text-ink">{t("time")}</label><input id="time" type="time" className={fieldClass} {...register("time")} />{errors.time && <p className="mt-2 text-sm text-danger">{t("required")}</p>}</div><div><label htmlFor="name" className="text-sm font-semibold text-ink">{t("name")}</label><input id="name" autoComplete="name" className={fieldClass} {...register("name")} />{errors.name && <p className="mt-2 text-sm text-danger">{t("required")}</p>}</div><div><label htmlFor="phone" className="text-sm font-semibold text-ink">{t("phone")}</label><input id="phone" type="tel" autoComplete="tel" className={fieldClass} {...register("phone")} />{errors.phone && <p className="mt-2 text-sm text-danger">{t("required")}</p>}</div><div><label htmlFor="email" className="text-sm font-semibold text-ink">{t("email")}</label><input id="email" type="email" autoComplete="email" className={fieldClass} {...register("email")} />{errors.email && <p className="mt-2 text-sm text-danger">{t("invalidEmail")}</p>}</div><div className="md:col-span-2"><label htmlFor="message" className="text-sm font-semibold text-ink">{t("message")}</label><textarea id="message" rows={4} placeholder={t("messagePlaceholder")} className={`${fieldClass} py-3`} {...register("message")} /></div><div className="md:col-span-2"><label htmlFor="attachments" className="text-sm font-semibold text-ink">{t("attachments")}</label><input id="attachments" name="attachments" type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf" className="mt-2 block w-full rounded-xl border border-dashed border-border p-4 text-sm text-muted" /><p className="mt-2 text-xs text-muted">{t("attachmentsHelp")}</p></div></div><label className="mt-7 flex items-start gap-3 text-sm leading-6 text-muted"><input type="checkbox" className="mt-1 size-4 accent-sapphire" {...register("transport")} />{t("transport")}</label><label className="mt-4 flex items-start gap-3 text-sm leading-6 text-muted"><input type="checkbox" className="mt-1 size-4 accent-sapphire" {...register("consent")} />{t("consent")}</label>{errors.consent && <p className="mt-2 text-sm text-danger">{t("required")}</p>}<input aria-hidden="true" tabIndex={-1} autoComplete="off" className="absolute -left-[9999px] h-px w-px" {...register("honeypot")} /><div className="mt-8 flex flex-wrap items-center gap-5"><button type="submit" disabled={isSubmitting} className="min-h-12 rounded-full bg-sapphire px-7 font-semibold text-white shadow-soft disabled:cursor-wait disabled:opacity-60">{isSubmitting ? "…" : t("submit")}</button><p className="text-sm text-muted">{t("pending")}</p></div></form>;
+export function BookingForm({ defaultSpecialty, defaultClinic }: { defaultSpecialty?: string; defaultClinic?: string }) {
+  const locale = useLocale();
+  const t = useTranslations("Lead");
+  const [state, action, pending] = useActionState((_previous: LeadActionResult | null, formData: FormData) => submitLead(formData), initialState);
+  if (state?.ok) return <div className="rounded-[2rem] border border-success/20 bg-success/5 p-8 shadow-soft"><p className="eyebrow text-success">{t("successEyebrow")}</p><h2 className="mt-3 font-display text-3xl text-sapphire">{t("successTitle")}</h2><p className="mt-3 text-muted">{t("successDescription", { reference: state.reference })}</p></div>;
+  const fieldClass = "mt-2 min-h-12 w-full rounded-xl border border-border bg-white px-4 text-ink transition duration-fast focus:border-sapphire focus:ring-2 focus:ring-champagne/40";
+  const isEnglish = locale === "en";
+  return <form action={action} className="rounded-[2rem] border border-border bg-white p-6 shadow-soft md:p-10"><input type="hidden" name="locale" value={locale} /><input type="hidden" name="source" value={defaultClinic ? `clinic:${defaultClinic}` : "website"} /><input type="hidden" name="clinic" value={defaultClinic || ""} /><div className="grid gap-7 md:grid-cols-2">
+    <div><label htmlFor="specialty" className="text-sm font-semibold text-ink">{t("specialty")}</label><select id="specialty" name="specialty" defaultValue={defaultSpecialty || ""} className={fieldClass}><option value="">{t("chooseSpecialty")}</option>{specialties.map((specialty) => <option key={specialty.slug} value={specialty.slug}>{specialty.name[locale as "es" | "en"]}</option>)}</select></div>
+    <div><label htmlFor="name" className="text-sm font-semibold text-ink">{t("name")}</label><input id="name" name="name" autoComplete="name" className={fieldClass} /></div>
+    <div><label htmlFor="phone" className="text-sm font-semibold text-ink">{t("phone")}</label><input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClass} /></div>
+    <div><label htmlFor="email" className="text-sm font-semibold text-ink">{t("email")}</label><input id="email" name="email" type="email" autoComplete="email" className={fieldClass} /></div>
+    <div className="md:col-span-2"><label htmlFor="message" className="text-sm font-semibold text-ink">{t("message")}</label><textarea id="message" name="message" rows={4} placeholder={t("messagePlaceholder")} className={`${fieldClass} py-3`} /><p className="mt-2 text-xs text-muted">{t("messageHelp")}</p></div>
+  </div><label className="mt-6 flex items-start gap-3 text-sm leading-6 text-muted"><input type="checkbox" name="companion" className="mt-1 size-4 accent-sapphire" />{t("companion")}</label><label className="mt-4 flex items-start gap-3 text-sm leading-6 text-muted"><input type="checkbox" name="consent" required className="mt-1 size-4 accent-sapphire" />{t("consent")}</label><input aria-hidden="true" tabIndex={-1} autoComplete="off" name="website" className="absolute -left-[9999px] h-px w-px" />{state && !state.ok && <p className="mt-4 text-sm text-danger" aria-live="polite">{t("error")}</p>}<div className="mt-8 flex flex-wrap items-center gap-5"><Button type="submit" disabled={pending}>{pending ? "…" : t("submit")}</Button><p className="text-sm text-muted">{isEnglish ? "An advisor will contact you after reviewing your request." : "Un asesor se pondrá en contacto contigo después de revisar tu solicitud."}</p></div></form>;
 }

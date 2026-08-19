@@ -1,39 +1,45 @@
 # Aura Estética
 
-MVP de prototipo para el escaparate bilingüe de Aura Estética. La fase 1 deja preparada la aplicación Next.js para continuar con Supabase, reservas y panel administrativo.
+MVP bilingüe para el escaparate de turismo sanitario y coordinación de tratamientos en Turquía para pacientes españolas.
+
+Aura se presenta como marca coordinadora: ofrece orientación, conecta con centros/profesionales y ayuda a organizar la logística. No diagnostica ni sustituye al equipo sanitario.
 
 ## Desarrollo local
 
 ```bash
 npm install
-cp .env.example .env.local
-npm run dev
+copy .env.example .env.local
+npm.cmd run dev
 ```
 
-Rutas iniciales:
+## Rutas principales
 
-- `/es` y `/en`: experiencia pública bilingüe.
-- `/es/servicios` y `/en/servicios`: catálogo provisional.
-- `/admin/login` y `/admin/dashboard`: estructura administrativa inicial.
+- `/es` y `/en`: home bilingüe.
+- `/es/especialidades` y `/en/especialidades`: especialidades publicadas.
+- `/es/especialidades/[slug]`: detalle de especialidad.
+- `/es/clinicas` y `/en/clinicas`: red de clínicas en verificación.
+- `/es/como-funciona` y `/en/como-funciona`: proceso de acompañamiento.
+- `/es/reservar` y `/en/reservar`: solicitud de llamada, no reserva de tratamiento.
+- `/admin/login` y `/admin/dashboard`: acceso y panel operativo inicial.
 - `/api/health`: comprobación básica del servicio.
+
+## Modelo actual
+
+- Especialidades iniciales: capilar, odontología y cirugía estética/corporal.
+- Sin precios públicos ni reserva automática de intervenciones.
+- Leads persistidos en Supabase cuando las variables de entorno están disponibles.
+- Notificación de nuevos leads mediante Resend cuando está configurado.
+- Clínicas y profesionales preparados en el esquema, pero ocultos hasta verificación.
+- El formulario inicial no recoge fotografías ni informes médicos.
 
 ## Comprobaciones
 
 ```bash
-npm run typecheck
-npm run lint
-npm run build
+npm.cmd run typecheck
+npm.cmd run lint
+npm.cmd run build
 ```
 
-## Estado de la fase 1
+La migración `supabase/migrations/202608180002_aura_leads_content.sql` añade especialidades, servicios editoriales, clínicas, profesionales, leads, notas, eventos y políticas RLS. Las tablas antiguas de reservas se conservan como historial y ya no forman parte del flujo público.
 
-- Next.js App Router y TypeScript estricto: listo.
-- Tailwind CSS, tokens visuales y base mobile-first: listo.
-- `next-intl` con español inicial e inglés: listo.
-- Separación inicial de rutas, internacionalización y configuración: lista.
-- Supabase, Server Actions, validaciones, emails y analítica: reservados para las fases siguientes.
-- GitHub y Vercel: pendientes de conectar con las cuentas del proyecto.
-
-El workflow de GitHub Actions en `.github/workflows/ci.yml` ejecuta lint, typecheck y build en cada pull request y en `main`. Al conectar el repositorio a Vercel, cada pull request podrá generar su Preview automáticamente.
-
-Los contenidos, precios, contacto, imágenes y ubicación actuales son provisionales según la documentación del MVP.
+Los textos de referencia se encuentran en `sdd/mvp/textos-especialidades.md` y la dirección de experiencia en `sdd/mvp/design-reference.md`.
