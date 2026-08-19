@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { specialties } from "@/lib/catalog/data";
+import { publishedSpecialties } from "@/lib/catalog/data";
 
-const featuredSlugs = ["capilar", "odontologia", "estetica", "medicina-estetica", "bariatrica", "oftalmologia"];
+const featuredSlugs = ["capilar", "odontologia", "estetica", "bariatrica", "oftalmologia"];
 
 export function SpecialtyCarousel({ locale }: { locale: string }) {
   const language = locale === "en" ? "en" : "es";
-  const cards = featuredSlugs.map((slug) => specialties.find((specialty) => specialty.slug === slug)).filter(Boolean);
+  const cards = featuredSlugs.map((slug) => publishedSpecialties.find((specialty) => specialty.slug === slug)).filter(Boolean);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 

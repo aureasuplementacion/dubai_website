@@ -6,6 +6,12 @@ const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: process.cwd(),
+  async redirects() {
+    return [
+      { source: "/:locale/servicios", destination: "/:locale/especialidades", permanent: true },
+      { source: "/:locale/servicios/:slug", destination: "/:locale/especialidades/:slug", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: [
       { key: "X-Content-Type-Options", value: "nosniff" },

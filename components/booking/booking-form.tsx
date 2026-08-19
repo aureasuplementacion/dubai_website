@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { submitLead, type LeadActionResult } from "@/lib/actions/leads";
-import { specialties } from "@/lib/catalog/data";
+import { publishedSpecialties } from "@/lib/catalog/data";
 import { Button } from "@/components/ui/button";
 
 const initialState: LeadActionResult | null = null;
@@ -16,7 +16,7 @@ export function BookingForm({ defaultSpecialty, defaultClinic }: { defaultSpecia
   const fieldClass = "mt-2 min-h-12 w-full rounded-xl border border-border bg-white px-4 text-ink transition duration-fast focus:border-sapphire focus:ring-2 focus:ring-champagne/40";
   const isEnglish = locale === "en";
   return <form action={action} className="rounded-[2rem] border border-border bg-white p-6 shadow-soft md:p-10"><input type="hidden" name="locale" value={locale} /><input type="hidden" name="source" value={defaultClinic ? `clinic:${defaultClinic}` : "website"} /><input type="hidden" name="clinic" value={defaultClinic || ""} /><div className="grid gap-7 md:grid-cols-2">
-    <div><label htmlFor="specialty" className="text-sm font-semibold text-ink">{t("specialty")}</label><select id="specialty" name="specialty" defaultValue={defaultSpecialty || ""} className={fieldClass}><option value="">{t("chooseSpecialty")}</option>{specialties.map((specialty) => <option key={specialty.slug} value={specialty.slug}>{specialty.name[locale as "es" | "en"]}</option>)}</select></div>
+    <div><label htmlFor="specialty" className="text-sm font-semibold text-ink">{t("specialty")}</label><select id="specialty" name="specialty" defaultValue={defaultSpecialty || ""} className={fieldClass}><option value="">{t("chooseSpecialty")}</option>{publishedSpecialties.map((specialty) => <option key={specialty.slug} value={specialty.slug}>{specialty.name[locale as "es" | "en"]}</option>)}</select></div>
     <div><label htmlFor="name" className="text-sm font-semibold text-ink">{t("name")}</label><input id="name" name="name" autoComplete="name" className={fieldClass} /></div>
     <div><label htmlFor="phone" className="text-sm font-semibold text-ink">{t("phone")}</label><input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClass} /></div>
     <div><label htmlFor="email" className="text-sm font-semibold text-ink">{t("email")}</label><input id="email" name="email" type="email" autoComplete="email" className={fieldClass} /></div>

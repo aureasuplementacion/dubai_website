@@ -123,3 +123,5 @@ export const specialties: Specialty[] = [
 
 export function getSpecialty(slug: string) { return specialties.find((specialty) => specialty.slug === slug); }
 export function getSpecialtyService(specialtySlug: string, serviceSlug: string) { const specialty = getSpecialty(specialtySlug); const service = specialty?.services.find((item) => item.slug === serviceSlug); return service ? { ...service, specialty } : undefined; }
+export const publishedSpecialtySlugs = ["capilar", "odontologia", "estetica", "bariatrica", "oftalmologia"] as const;
+export const publishedSpecialties = specialties.filter((specialty) => publishedSpecialtySlugs.includes(specialty.slug as (typeof publishedSpecialtySlugs)[number]));

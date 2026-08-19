@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/catalog/data";
 
-export type DemoProfessional = {
+export type ClinicProfessional = {
   slug: string;
   name: string;
   role: Record<Locale, string>;
@@ -9,10 +9,10 @@ export type DemoProfessional = {
   bio: Record<Locale, string>;
 };
 
-export type DemoClinic = {
+export type Clinic = {
   slug: string;
   name: string;
-  city: "Estambul" | "Antalya" | "Izmir";
+  city: "Estambul";
   cityLabel: Record<Locale, string>;
   description: Record<Locale, string>;
   specialties: string[];
@@ -23,26 +23,50 @@ export type DemoClinic = {
   included: Record<Locale, string[]>;
   followUp: Record<Locale, string>;
   lastVerified: string;
-  demo: boolean;
-  professionals: DemoProfessional[];
+  professionals: ClinicProfessional[];
+  address: string;
+  website: string;
+  phone: string;
+  accreditations: string[];
 };
 
-const professional = (slug: string, name: string, roleEs: string, roleEn: string, specialties: string[], languages: string[], bioEs: string, bioEn: string): DemoProfessional => ({ slug, name, role: { es: roleEs, en: roleEn }, specialties, languages, bio: { es: bioEs, en: bioEn } });
-
-const commonFacilities = {
-  es: ["Recepción internacional", "Coordinación de pruebas", "Seguimiento postoperatorio según el centro"],
-  en: ["International reception", "Test coordination", "Post-treatment follow-up according to the centre"],
+export const bhtClinic: Clinic = {
+  slug: "bht-clinic",
+  name: "BHT CLINIC Istanbul Tema Hospital",
+  city: "Estambul",
+  cityLabel: { es: "Estambul", en: "Istanbul" },
+  description: {
+    es: "Hospital privado de referencia en Estambul con atención internacional y coordinación para pacientes que viajan desde España.",
+    en: "A private hospital in Istanbul with international patient support and coordination for people travelling from Spain.",
+  },
+  specialties: ["estetica", "bariatrica", "odontologia", "oftalmologia", "capilar"],
+  languages: ["Español", "Inglés", "Turco"],
+  internationalUnit: true,
+  interpreter: true,
+  facilities: {
+    es: ["Hospital de 55.000 m² y 19 plantas", "20 quirófanos y unidades de cuidados intensivos", "Unidad de pacientes internacionales", "Más de 100 médicos y más de 1.000 profesionales"],
+    en: ["55,000 m² hospital across 19 floors", "20 operating rooms and intensive care units", "International patient centre", "More than 100 doctors and 1,000 staff members"],
+  },
+  included: {
+    es: ["Coordinador internacional", "Interpretación y comunicación con el centro", "Opciones de hotel y traslado privado según propuesta", "Apoyo 24/7 durante el proceso, según el servicio contratado"],
+    en: ["International coordinator", "Interpretation and communication with the centre", "Hotel and private transfer options according to the proposal", "24/7 support during the process, according to the contracted service"],
+  },
+  followUp: {
+    es: "La valoración, el diagnóstico, la indicación y el seguimiento clínico corresponden al equipo sanitario responsable.",
+    en: "Assessment, diagnosis, treatment indication and clinical follow-up belong to the responsible healthcare team.",
+  },
+  lastVerified: "2026-08-19",
+  address: "Atakent Mahallesi, 4. Cadde, No:4/1, Küçükçekmece, Estambul, Turquía",
+  website: "https://international.bhtclinic.com.tr/lang/es",
+  phone: "+90 212 404 44 44",
+  accreditations: ["JCI", "TEMOS", "TÜSKA Gold", "LEED Gold"],
+  professionals: [],
 };
 
-export const demoClinics: DemoClinic[] = [
-  { slug: "bosporus-aesthetic-center", name: "Bosporus Aesthetic Center", city: "Estambul", cityLabel: { es: "Estambul", en: "Istanbul" }, description: { es: "Centro privado de demostración orientado a cirugía estética, medicina estética y coordinación internacional.", en: "Demo private centre focused on aesthetic surgery, aesthetic medicine and international coordination." }, specialties: ["estetica", "medicina-estetica"], languages: ["Español", "Inglés", "Turco"], internationalUnit: true, interpreter: true, facilities: commonFacilities, included: { es: ["Recepción y coordinación internacional", "Traslado según propuesta", "Orientación de alojamiento"], en: ["International reception and coordination", "Transfer according to proposal", "Accommodation guidance"] }, followUp: { es: "El plan de seguimiento se confirma con el equipo responsable antes de viajar.", en: "The follow-up plan is confirmed with the responsible team before travel." }, lastVerified: "2026-08", demo: true, professionals: [professional("aylin-demir", "Dra. Aylin Demir", "Cirugía plástica y reconstructiva", "Plastic and reconstructive surgery", ["estetica", "medicina-estetica"], ["Turco", "Inglés"], "Perfil de demostración para explicar la relación entre centro, profesional y paciente.", "Demo profile showing the relationship between centre, professional and patient."), professional("mert-kaya", "Dr. Mert Kaya", "Medicina estética", "Aesthetic medicine", ["medicina-estetica"], ["Turco", "Inglés", "Español"], "Perfil ficticio centrado en la valoración y coordinación de tratamientos estéticos.", "Fictional profile focused on assessment and coordination of aesthetic treatments.")] },
-  { slug: "golden-horn-dental", name: "Golden Horn Dental Institute", city: "Estambul", cityLabel: { es: "Estambul", en: "Istanbul" }, description: { es: "Clínica dental de demostración para tratamientos restauradores, estéticos y de rehabilitación oral.", en: "Demo dental clinic for restorative, cosmetic and oral rehabilitation treatments." }, specialties: ["odontologia"], languages: ["Español", "Inglés", "Turco"], internationalUnit: true, interpreter: true, facilities: commonFacilities, included: { es: ["Consulta inicial coordinada", "Planificación por fases", "Orientación logística"], en: ["Coordinated initial consultation", "Phased planning", "Logistics guidance"] }, followUp: { es: "Las revisiones y el seguimiento se definen con el equipo odontológico.", en: "Reviews and follow-up are defined with the dental team." }, lastVerified: "2026-08", demo: true, professionals: [professional("selin-aksoy", "Dra. Selin Aksoy", "Odontología restauradora", "Restorative dentistry", ["odontologia"], ["Turco", "Inglés"], "Perfil ficticio de profesional asociado al centro de demostración.", "Fictional professional profile associated with the demo centre."), professional("emre-celik", "Dr. Emre Çelik", "Rehabilitación oral", "Oral rehabilitation", ["odontologia"], ["Turco", "Inglés", "Español"], "Perfil demo para mostrar experiencia, idiomas y área de trabajo.", "Demo profile showing experience, languages and field of work.")] },
-  { slug: "istanbul-hair-institute", name: "Istanbul Hair Institute", city: "Estambul", cityLabel: { es: "Estambul", en: "Istanbul" }, description: { es: "Centro de demostración especializado en valoración capilar y coordinación de restauración de cabello, barba y cejas.", en: "Demo centre specialising in hair assessment and coordination for scalp, beard and eyebrow restoration." }, specialties: ["capilar"], languages: ["Español", "Inglés", "Turco"], internationalUnit: true, interpreter: true, facilities: commonFacilities, included: { es: ["Valoración capilar inicial", "Coordinación de agenda", "Orientación de estancia"], en: ["Initial hair assessment", "Appointment coordination", "Stay guidance"] }, followUp: { es: "El equipo explica las pautas y revisiones disponibles antes de confirmar el viaje.", en: "The team explains available guidance and reviews before the trip is confirmed." }, lastVerified: "2026-08", demo: true, professionals: [professional("kaan-yilmaz", "Dr. Kaan Yilmaz", "Cirugía capilar", "Hair restoration surgery", ["capilar"], ["Turco", "Inglés"], "Perfil ficticio para el prototipo de red capilar.", "Fictional profile for the hair network prototype."), professional("elif-arslan", "Dra. Elif Arslan", "Dermatología capilar", "Hair dermatology", ["capilar", "medicina-estetica"], ["Turco", "Inglés", "Español"], "Perfil de demostración sobre valoración del cuero cabelludo.", "Demo profile focused on scalp assessment.")] },
-  { slug: "antalya-wellness-hospital", name: "Antalya Wellness Hospital", city: "Antalya", cityLabel: { es: "Antalya", en: "Antalya" }, description: { es: "Hospital privado de demostración con servicios coordinados de cirugía corporal y atención bariátrica.", en: "Demo private hospital with coordinated body surgery and bariatric care services." }, specialties: ["estetica", "bariatrica"], languages: ["Español", "Inglés", "Turco", "Alemán"], internationalUnit: true, interpreter: true, facilities: { es: ["Unidad internacional", "Hospitalización privada", "Coordinación de pruebas y revisiones"], en: ["International unit", "Private hospital stay", "Test and review coordination"] }, included: { es: ["Coordinación de llegada", "Orientación de alojamiento", "Plan de seguimiento del centro"], en: ["Arrival coordination", "Accommodation guidance", "Centre follow-up plan"] }, followUp: { es: "El seguimiento depende de la intervención y del plan indicado por el equipo sanitario.", en: "Follow-up depends on the procedure and plan advised by the healthcare team." }, lastVerified: "2026-08", demo: true, professionals: [professional("deniz-ozkan", "Dr. Deniz Özkan", "Cirugía general y bariátrica", "General and bariatric surgery", ["bariatrica"], ["Turco", "Inglés"], "Perfil ficticio para mostrar un hospital con varias unidades.", "Fictional profile showing a hospital with multiple units."), professional("leyla-kurt", "Dra. Leyla Kurt", "Cirugía corporal", "Body contouring surgery", ["estetica"], ["Turco", "Inglés", "Español"], "Perfil de demostración del área de cirugía corporal.", "Demo profile for the body surgery area.")] },
-  { slug: "izmir-vision-clinic", name: "Izmir Vision Clinic", city: "Izmir", cityLabel: { es: "Izmir", en: "Izmir" }, description: { es: "Clínica oftalmológica de demostración para estudios visuales y opciones de cirugía refractiva.", en: "Demo ophthalmology clinic for vision assessments and refractive surgery options." }, specialties: ["oftalmologia"], languages: ["Español", "Inglés", "Turco"], internationalUnit: true, interpreter: true, facilities: { es: ["Consulta oftalmológica", "Pruebas visuales", "Coordinación internacional"], en: ["Ophthalmology consultation", "Vision tests", "International coordination"] }, included: { es: ["Coordinación de pruebas", "Agenda de consulta", "Orientación de traslado"], en: ["Test coordination", "Consultation scheduling", "Transfer guidance"] }, followUp: { es: "El equipo oftalmológico informa sobre controles y evolución cuando proceda.", en: "The ophthalmology team explains controls and progress when applicable." }, lastVerified: "2026-08", demo: true, professionals: [professional("burak-eren", "Dr. Burak Eren", "Oftalmología", "Ophthalmology", ["oftalmologia"], ["Turco", "Inglés"], "Perfil ficticio para la clínica visual de demostración.", "Fictional profile for the demo vision clinic.")] },
-  { slug: "marmara-reproductive-center", name: "Marmara Reproductive Center", city: "Estambul", cityLabel: { es: "Estambul", en: "Istanbul" }, description: { es: "Centro de reproducción asistida de demostración con coordinación sensible para pacientes internacionales.", en: "Demo assisted reproduction centre with sensitive coordination for international patients." }, specialties: ["fertilidad"], languages: ["Español", "Inglés", "Turco"], internationalUnit: true, interpreter: true, facilities: { es: ["Unidad internacional", "Consulta especializada", "Coordinación de pruebas"], en: ["International unit", "Specialist consultation", "Test coordination"] }, included: { es: ["Orientación inicial", "Coordinación documental", "Información logística"], en: ["Initial guidance", "Document coordination", "Logistics information"] }, followUp: { es: "Los requisitos, plazos y revisiones se confirman directamente con el centro.", en: "Requirements, timelines and reviews are confirmed directly with the centre." }, lastVerified: "2026-08", demo: true, professionals: [professional("zeynep-aydin", "Dra. Zeynep Aydin", "Medicina reproductiva", "Reproductive medicine", ["fertilidad"], ["Turco", "Inglés", "Español"], "Perfil ficticio para representar la coordinación de fertilidad.", "Fictional profile representing fertility coordination.")] },
-];
+export const verifiedClinics = [bhtClinic];
+export const clinicCities = [bhtClinic.city];
+export const clinicSpecialties = bhtClinic.specialties;
+export function getClinic(slug: string) { return verifiedClinics.find((clinic) => clinic.slug === slug); }
 
-export const clinicCities = [...new Set(demoClinics.map((clinic) => clinic.city))];
-export const clinicSpecialties = [...new Set(demoClinics.flatMap((clinic) => clinic.specialties))];
-export function getDemoClinic(slug: string) { return demoClinics.find((clinic) => clinic.slug === slug); }
+// Kept only to provide a controlled redirect from the former prototype routes.
+export const legacyClinicSlugs = ["bosporus-aesthetic-center", "golden-horn-dental", "istanbul-hair-institute", "antalya-wellness-hospital", "izmir-vision-clinic", "marmara-reproductive-center"];
