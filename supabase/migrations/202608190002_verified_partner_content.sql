@@ -89,7 +89,7 @@ create policy accommodation_staff_manage on public.accommodation_options for all
 create policy transport_public_read on public.transport_options for select to anon, authenticated using (verification_status = 'published');
 create policy transport_staff_manage on public.transport_options for all to authenticated using (public.is_manager_or_admin()) with check (public.is_manager_or_admin());
 
-update public.specialties set status = case when slug in ('capilar', 'odontologia', 'estetica', 'bariatrica', 'oftalmologia') then 'published' else 'draft' end;
+update public.specialties set status = case when slug in ('capilar', 'odontologia', 'estetica', 'bariatrica', 'oftalmologia') then 'published'::public.content_status else 'draft'::public.content_status end;
 
 insert into public.travel_partners (slug, partner_type, name, short_description_es, short_description_en, description_es, description_en, address, city, country, contact_email, contact_phone, website_url, verification_status, last_verified, source_url, sort_order)
 values
