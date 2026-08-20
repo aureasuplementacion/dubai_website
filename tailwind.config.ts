@@ -7,7 +7,7 @@ const config: Config = {
       colors: {
         sapphire: { DEFAULT: "var(--color-brand-primary)", dark: "var(--color-brand-primary-strong)" },
         champagne: { DEFAULT: "var(--color-brand-accent)", light: "var(--color-brand-accent-soft)" },
-        ink: "var(--color-text-primary)", muted: "var(--color-text-secondary)", surface: "var(--color-bg-subtle)", border: "var(--color-border)",
+        ink: "var(--color-text-primary)", muted: "var(--color-text-secondary)", surface: "var(--color-bg-subtle)", canvas: "var(--color-bg-canvas)", deep: "var(--color-bg-deep)", border: "var(--color-border)",
         success: "var(--color-success)", warning: "var(--color-warning)", danger: "var(--color-danger)", info: "var(--color-info)"
       },
       fontFamily: { display: ["var(--font-display)", "serif"], sans: ["var(--font-sans)", "sans-serif"] },

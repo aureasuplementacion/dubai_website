@@ -1,26 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: Manrope, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-sans: Inter, Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --color-brand-primary: #12395b;
-  --color-brand-primary-strong: #0b263d;
-  --color-brand-accent: #c8a96b;
-  --color-brand-accent-soft: #f2e9d7;
-  --color-bg-canvas: #fffefc;
-  --color-bg-subtle: #f6f4ef;
-  --color-text-primary: #17212b;
-  --color-text-secondary: #5d6874;
-  --color-border: #dde2e4;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-brand-primary: #17324a;
+  --color-brand-primary-strong: #0d1f2d;
+  --color-brand-accent: #b99055;
+  --color-brand-accent-soft: #f1e7d8;
+  --color-bg-canvas: #fbfaf7;
+  --color-bg-subtle: #f2efe9;
+  --color-bg-deep: #102532;
+  --color-text-primary: #17232c;
+  --color-text-secondary: #65717a;
+  --color-border: #dedbd4;
   --color-success: #247a56;
   --color-warning: #9a6a12;
   --color-danger: #b04444;
   --color-info: #25658f;
-  --radius-card: 1.25rem;
-  --radius-panel: 2rem;
-  --shadow-soft: 0 20px 60px rgba(18, 57, 91, 0.1);
+  --radius-card: 1.75rem;
+  --radius-panel: 1.75rem;
+  --shadow-soft: 0 24px 70px rgba(13, 31, 45, 0.11);
   --motion-fast: 120ms;
   --motion-base: 180ms;
   --motion-slow: 320ms;
@@ -36,15 +39,14 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 3px solid var(--color-brand-accent); outline-offset: 3px; }
 ::selection { background: var(--color-brand-accent-soft); color: var(--color-brand-primary-strong); }
 
-.container-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-.font-display { letter-spacing: -.035em; }
+.container-shell { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+.font-display { letter-spacing: -.025em; }
 .premium-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--color-brand-accent), transparent); }
 .image-frame { overflow: hidden; border-radius: var(--radius-panel); background: var(--color-bg-subtle); }
 .image-frame img { transition: transform var(--motion-slow) var(--motion-standard); }
-.image-frame:hover img { transform: scale(1.015); }
+.image-frame:hover img { transform: scale(1.012); }
 .eyebrow { color: var(--color-brand-accent); font-size: .72rem; font-weight: 800; letter-spacing: .22em; line-height: 1.4; text-transform: uppercase; }
-.eyebrow-on-dark { color: #ead19a; }
-.surface-grid { background-image: linear-gradient(to right, rgba(18, 57, 91, .035) 1px, transparent 1px), linear-gradient(to bottom, rgba(18, 57, 91, .035) 1px, transparent 1px); background-size: 32px 32px; }
+.eyebrow-on-dark { color: #e5c999; }
 .reveal { animation: reveal-up var(--motion-slow) var(--motion-standard) both; }
 
 @keyframes reveal-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -59,6 +61,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 767px) {
-  .font-display { letter-spacing: -.025em; }
+  .font-display { letter-spacing: -.015em; }
   .image-frame:hover img { transform: none; }
 }
