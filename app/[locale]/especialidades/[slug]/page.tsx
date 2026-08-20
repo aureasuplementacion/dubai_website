@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { publishedSpecialties } from "@/lib/catalog/data";
-import { getPublishedSpecialty } from "@/lib/catalog/server-data";
 import { ButtonLink } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
 
@@ -10,7 +9,7 @@ export function generateStaticParams() { return publishedSpecialties.map((specia
 
 export default async function SpecialtyDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params;
-  const specialty = await getPublishedSpecialty(slug);
+  const specialty = publishedSpecialties.find((item) => item.slug === slug);
   if (!specialty) notFound();
   const t = await getTranslations("Specialties");
   const language = locale as "es" | "en";

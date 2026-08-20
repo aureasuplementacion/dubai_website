@@ -4,15 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { Specialty } from "@/lib/catalog/data";
+import { publishedSpecialties } from "@/lib/catalog/data";
 import { media } from "@/lib/media/registry";
 
 const featuredSlugs = ["capilar", "odontologia", "estetica", "bariatrica", "oftalmologia"];
 const specialtyImages: Record<string, { desktop: string; alt: { es: string; en: string } }> = { capilar: media.specialties.capilar, odontologia: media.specialties.odontologia, estetica: media.specialties.estetica, bariatrica: media.specialties.bariatrica, oftalmologia: media.specialties.oftalmologia };
 
-export function SpecialtyCarousel({ locale, specialties }: { locale: string; specialties: Specialty[] }) {
+export function SpecialtyCarousel({ locale }: { locale: string }) {
   const language = locale === "en" ? "en" : "es";
-  const cards = featuredSlugs.map((slug) => specialties.find((specialty) => specialty.slug === slug)).filter(Boolean);
+  const cards = featuredSlugs.map((slug) => publishedSpecialties.find((specialty) => specialty.slug === slug)).filter(Boolean);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   function updateActive() { const track = trackRef.current; const card = track?.firstElementChild as HTMLElement | null; if (!track || !card) return; setActive(Math.min(cards.length - 1, Math.round(track.scrollLeft / (card.offsetWidth + 20)))); }

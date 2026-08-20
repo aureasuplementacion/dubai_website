@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { specialties } from "@/lib/catalog/data";
-import { getPublishedSpecialty, getPublishedSpecialtyService } from "@/lib/catalog/server-data";
+import { getSpecialty, getSpecialtyService, specialties } from "@/lib/catalog/data";
 import { ButtonLink } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
 
@@ -12,8 +11,8 @@ export function generateStaticParams() {
 
 export default async function TreatmentDetailPage({ params }: { params: Promise<{ locale: string; slug: string; serviceSlug: string }> }) {
   const { locale, slug, serviceSlug } = await params;
-  const specialty = await getPublishedSpecialty(slug);
-  const treatment = await getPublishedSpecialtyService(slug, serviceSlug);
+  const specialty = getSpecialty(slug);
+  const treatment = getSpecialtyService(slug, serviceSlug);
   if (!specialty || !treatment) notFound();
   const t = await getTranslations("Specialties");
   const language = locale as "es" | "en";
