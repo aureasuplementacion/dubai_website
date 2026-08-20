@@ -1,5 +1,7 @@
 # Arquitectura vigente
 
+> Esta arquitectura describe la evolución inicial. Para el estado real y las decisiones actuales, consultar [`auditoria-total.md`](./auditoria-total.md).
+
 ## Aplicación
 
 Next.js App Router con rutas públicas en español/inglés, componentes React y server actions. El middleware combina internacionalización con renovación de sesiones Supabase y protección del panel.

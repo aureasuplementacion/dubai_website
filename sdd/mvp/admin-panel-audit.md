@@ -1,5 +1,7 @@
 # Auditoría y especificación del panel administrativo
 
+> Documento de diseño y alcance histórico. El panel y CRM actuales se describen en [`auditoria-total.md`](./auditoria-total.md).
+
 ## Estado de partida
 
 La Fase 4 deja operativo el flujo público de captación: el formulario crea leads en Supabase, registra `lead_created` y envía las notificaciones mediante Resend. El dashboard administrativo actual valida la sesión y muestra contadores, pero todavía no permite trabajar comercialmente cada solicitud.

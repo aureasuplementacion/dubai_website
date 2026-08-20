@@ -1,5 +1,7 @@
 # Pendientes del proyecto — Aura Estética
 
+> Documento histórico de seguimiento. El estado vigente y la clasificación de pendientes están en [`sdd/mvp/auditoria-total.md`](../sdd/mvp/auditoria-total.md).
+
 **Fecha de revisión:** 20 de agosto de 2026  
 **Estado:** Frontend visual cerrado · Fase 4 implementada en local · Pendiente de validación externa y preparación de producción
 

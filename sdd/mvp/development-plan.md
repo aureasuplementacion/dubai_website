@@ -1,5 +1,7 @@
 # Plan de desarrollo y despliegue — Aura Estética
 
+> Documento histórico del MVP inicial. La referencia vigente del producto y de sus fases es [`auditoria-total.md`](./auditoria-total.md).
+
 **Versión:** 0.1 — MVP de prototipo  
 **Estado:** Plan inicial de implementación  
 **Objetivo inmediato:** Demo funcional en Preview para validación con el cliente
