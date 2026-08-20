@@ -12,7 +12,7 @@ export default async function proxy(request: NextRequest) {
   if (!url || !key) return response;
   const supabase = createServerClient(url, key, { cookies: { getAll: () => request.cookies.getAll(), setAll(values) { values.forEach(({ name, value }) => request.cookies.set(name, value)); response = NextResponse.next({ request }); values.forEach(({ name, value, options }) => response.cookies.set(name, value, options)); } } });
   const { data: { user } } = await supabase.auth.getUser();
-  const isAdminRoute = /^\/admin\/dashboard(?:\/|$)/.test(request.nextUrl.pathname);
+  const isAdminRoute = /^\/admin\/(?:dashboard|crm)(?:\/|$)/.test(request.nextUrl.pathname);
   if (isAdminRoute && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/admin/login";

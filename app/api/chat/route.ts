@@ -59,7 +59,8 @@ export async function POST(request: Request) {
     const handoff = whatsapp ? { channel: "whatsapp" as const, href: whatsapp } : telegram ? { channel: "telegram" as const, href: telegram } : null;
     return NextResponse.json({ message, ...(handoff ? { handoff: { ...handoff, reason: "user_request" as const } } : {}) });
   } catch (error) {
-    console.error("OpenAI chatbot error", error);
+    const errorStatus = error instanceof OpenAI.APIError ? error.status : undefined;
+    console.error("OpenAI chatbot error", { status: errorStatus, type: error instanceof Error ? error.name : "unknown" });
     if (error instanceof OpenAI.APIError && error.status === 429) return NextResponse.json({ error: "The chatbot quota is temporarily unavailable." }, { status: 503 });
     return NextResponse.json({ error: "The chatbot is temporarily unavailable." }, { status: 502 });
   }
