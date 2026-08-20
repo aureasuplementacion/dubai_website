@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { LogoutButton } from "@/app/admin/logout-button";
 import { AdminLeadsPanel } from "@/components/admin/admin-leads-panel";
 import { getAdminLeadSummary, getAdminLeads, getAdminProfiles } from "@/lib/actions/admin-leads";
@@ -21,7 +21,7 @@ export default async function AdminDashboardPage() {
   return <main className="container-shell py-12 md:py-16">
     <div className="flex flex-wrap items-end justify-between gap-5">
       <div><p className="eyebrow">Aura Estética · Operativa</p><h1 className="mt-3 font-display text-5xl text-sapphire">Pipeline de acompañamiento</h1><p className="mt-4 max-w-2xl text-muted">Sesión activa para {profile.full_name || profile.email}. Gestiona cada solicitud con contexto y próximo paso.</p></div>
-      <div className="flex gap-3"><Button disabled>Contenido próximamente</Button><LogoutButton /></div>
+      <div className="flex gap-3"><ButtonLink tone="secondary" href="/admin/content">Gestionar contenido</ButtonLink><LogoutButton /></div>
     </div>
     <AdminLeadsPanel initialLeads={initialLeads} initialCount={initialCount} initialTotalPages={initialTotalPages} specialties={(specialties || []) as { id: string; name_es: string }[]} profiles={profiles} summary={summary} isAdmin={profile.role === "admin"} />
   </main>;
