@@ -5,7 +5,7 @@ import { Download, Mail, MessageCircle, Phone, RefreshCw, Search, UserRound } fr
 import { Button } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
 import { addLeadNote, exportAdminLeads, getAdminLeads, getLeadDetail, updateLead, type AdminLead, type AdminProfile, type LeadDetail, type LeadFilters } from "@/lib/actions/admin-leads";
-import { leadStatuses, leadStatusLabels, leadStatusTones, type LeadStatus } from "@/lib/admin/lead-status";
+import { leadStatuses, leadStatusGroups, leadStatusLabels, leadStatusTones, type LeadStatus } from "@/lib/admin/lead-status";
 
 type Specialty = { id: string; name_es: string };
 type Summary = { total: number; newCount: number; contactCount: number; qualifiedCount: number; travelCount: number };
@@ -70,10 +70,14 @@ export function AdminLeadsPanel({ initialLeads, initialCount, initialTotalPages,
   async function updateField(input: { status?: LeadStatus; assignedTo?: string | null; nextActionAt?: string | null }) {
     if (!selectedLead) return;
     setMessage("");
-    const result = await updateLead({ leadId: selectedLead.id, ...input });
-    if (!result.ok) { setMessage(result.message); return; }
-    setMessage("Cambios guardados.");
-    refresh(selectedLead.id);
+    try {
+      const result = await updateLead({ leadId: selectedLead.id, ...input });
+      if (!result.ok) { setMessage(result.message); return; }
+      setMessage("Cambios guardados.");
+      await refresh(selectedLead.id);
+    } catch {
+      setMessage("No se ha podido guardar el cambio. Comprueba la configuración de Supabase y vuelve a intentarlo.");
+    }
   }
 
   async function handleNote(event: FormEvent<HTMLFormElement>) {
@@ -127,7 +131,7 @@ export function AdminLeadsPanel({ initialLeads, initialCount, initialTotalPages,
 function LeadDetailPanel({ detail, profiles, onUpdate, onNote }: { detail: LeadDetail | null; profiles: AdminProfile[]; onUpdate: (input: { status?: LeadStatus; assignedTo?: string | null; nextActionAt?: string | null }) => Promise<void>; onNote: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   if (!detail) return <aside className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center"><UserRound size={30} className="mx-auto text-muted" aria-hidden="true" /><p className="mt-4 font-display text-2xl text-sapphire">Selecciona un lead</p><p className="mt-2 text-sm text-muted">Aquí aparecerán los datos, acciones e historial de la solicitud.</p></aside>;
   const { lead, notes, events } = detail;
-  return <aside className="min-w-0 rounded-2xl border border-border bg-surface p-5 md:p-6"><div className="flex items-start justify-between gap-4"><div><p className="eyebrow">Detalle de solicitud</p><h3 className="mt-2 font-display text-3xl text-sapphire">{lead.customer_name}</h3><p className="mt-1 text-sm text-muted">{lead.reference}</p></div><Status tone={leadStatusTones[lead.status]}>{leadStatusLabels[lead.status]}</Status></div>
+  return <aside className="min-w-0 rounded-2xl border border-border bg-surface p-5 md:p-6"><div className="flex items-start justify-between gap-4"><div><p className="eyebrow">Detalle de solicitud</p><h3 className="mt-2 font-display text-3xl text-sapphire">{lead.customer_name}</h3><p className="mt-1 text-sm text-muted">{lead.reference} · {leadStatusGroups[lead.status]}</p></div><Status tone={leadStatusTones[lead.status]}>{leadStatusLabels[lead.status]}</Status></div>
     <div className="mt-6 grid gap-3 sm:grid-cols-2"><a className="rounded-xl border border-border bg-white p-3 text-sm text-sapphire hover:border-champagne" href={`mailto:${lead.customer_email}`}><Mail size={16} className="mb-2 text-champagne" aria-hidden="true" />{lead.customer_email}</a><a className="rounded-xl border border-border bg-white p-3 text-sm text-sapphire hover:border-champagne" href={leadPhoneHref(lead.customer_phone)}><Phone size={16} className="mb-2 text-champagne" aria-hidden="true" />{lead.customer_phone}</a></div>
     <div className="mt-5 flex flex-wrap gap-2"><a className="inline-flex min-h-10 items-center gap-2 rounded-full border border-sapphire px-4 py-2 text-xs font-bold text-sapphire hover:bg-white" href={`mailto:${lead.customer_email}`}><Mail size={15} aria-hidden="true" />Email</a><a className="inline-flex min-h-10 items-center gap-2 rounded-full border border-sapphire px-4 py-2 text-xs font-bold text-sapphire hover:bg-white" href={leadPhoneHref(lead.customer_phone)}><Phone size={15} aria-hidden="true" />Llamar</a><a className="inline-flex min-h-10 items-center gap-2 rounded-full border border-sapphire px-4 py-2 text-xs font-bold text-sapphire hover:bg-white" href={`https://t.me/${process.env.NEXT_PUBLIC_TELEGRAM_USERNAME || "sebasti22"}`} target="_blank" rel="noreferrer"><MessageCircle size={15} aria-hidden="true" />Telegram</a></div>
     <div className="mt-7 grid gap-4"><label className="text-sm font-semibold text-sapphire">Estado<select value={lead.status} onChange={(event) => void onUpdate({ status: event.target.value as LeadStatus })} className="mt-2 w-full rounded-xl border border-border bg-white px-3 py-3 text-sm"><option value="">Seleccionar estado</option>{leadStatuses.map((status) => <option key={status} value={status}>{leadStatusLabels[status]}</option>)}</select></label><label className="text-sm font-semibold text-sapphire">Responsable<select value={lead.assigned_to || ""} onChange={(event) => void onUpdate({ assignedTo: event.target.value || null })} className="mt-2 w-full rounded-xl border border-border bg-white px-3 py-3 text-sm"><option value="">Sin asignar</option>{profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.full_name || profile.email}</option>)}</select></label><label className="text-sm font-semibold text-sapphire">Próxima acción<input type="datetime-local" value={localDateTime(lead.next_action_at)} onChange={(event) => void onUpdate({ nextActionAt: event.target.value ? new Date(event.target.value).toISOString() : null })} className="mt-2 w-full rounded-xl border border-border bg-white px-3 py-3 text-sm" /></label></div>

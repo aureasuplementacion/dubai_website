@@ -76,16 +76,20 @@ async function lookupMaps(supabase: Awaited<ReturnType<typeof requireStaff>>["su
 }
 
 async function recordAudit(actorId: string, action: string, entityId: string, metadata: Record<string, unknown>) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) throw new Error("audit_service_not_configured");
-  const serviceClient = createClient(url, serviceKey, { auth: { autoRefreshToken: false, persistSession: false } });
+  const serviceClient = createServiceClient();
   const result = await serviceClient.from("audit_logs").insert({ actor_id: actorId, action, entity_type: "lead", entity_id: entityId, metadata });
   if (result.error) throw new Error("audit_persist_failed");
 }
 
-async function recordEvent(supabase: Awaited<ReturnType<typeof requireStaff>>["supabase"], actorId: string, leadId: string, eventType: string, metadata: Record<string, unknown> = {}) {
-  const result = await supabase.from("lead_events").insert({ actor_id: actorId, lead_id: leadId, event_type: eventType, metadata });
+function createServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceKey) throw new Error("supabase_service_not_configured");
+  return createClient(url, serviceKey, { auth: { autoRefreshToken: false, persistSession: false } });
+}
+
+async function recordEvent(actorId: string, leadId: string, eventType: string, metadata: Record<string, unknown> = {}) {
+  const result = await createServiceClient().from("lead_events").insert({ actor_id: actorId, lead_id: leadId, event_type: eventType, metadata });
   if (result.error) throw new Error("event_persist_failed");
 }
 
@@ -125,16 +129,17 @@ export async function getLeadDetail(leadId: string) {
 export async function updateLead(input: unknown) {
   const parsed = updateLeadSchema.safeParse(input);
   if (!parsed.success || (!parsed.data.status && parsed.data.assignedTo === undefined && parsed.data.nextActionAt === undefined)) return { ok: false as const, message: "No hay cambios válidos que guardar." };
-  const { supabase, user } = await requireStaff();
+  const { user } = await requireStaff();
+  const serviceClient = createServiceClient();
   const payload: Record<string, unknown> = {};
   if (parsed.data.status) payload.status = parsed.data.status;
   if (parsed.data.assignedTo !== undefined) payload.assigned_to = parsed.data.assignedTo;
   if (parsed.data.nextActionAt !== undefined) payload.next_action_at = parsed.data.nextActionAt;
-  const { data: before } = await supabase.from("leads").select("status, assigned_to, next_action_at").eq("id", parsed.data.leadId).maybeSingle();
-  const { error } = await supabase.from("leads").update(payload).eq("id", parsed.data.leadId);
+  const { data: before } = await serviceClient.from("leads").select("status, assigned_to, next_action_at").eq("id", parsed.data.leadId).maybeSingle();
+  const { error } = await serviceClient.from("leads").update(payload).eq("id", parsed.data.leadId);
   if (error) return { ok: false as const, message: "No se han podido guardar los cambios." };
   const changes = { before: before || {}, after: payload };
-  await recordEvent(supabase, user.id, parsed.data.leadId, parsed.data.status ? "status_changed" : "lead_updated", changes);
+  await recordEvent(user.id, parsed.data.leadId, parsed.data.status ? "status_changed" : "lead_updated", changes);
   await recordAudit(user.id, parsed.data.status ? "lead_status_updated" : "lead_updated", parsed.data.leadId, changes);
   return { ok: true as const };
 }
@@ -142,10 +147,10 @@ export async function updateLead(input: unknown) {
 export async function addLeadNote(input: unknown) {
   const parsed = z.object({ leadId: leadIdSchema, note: z.string().trim().min(2).max(2000) }).safeParse(input);
   if (!parsed.success) return { ok: false as const, message: "La nota debe tener entre 2 y 2.000 caracteres." };
-  const { supabase, user } = await requireStaff();
-  const { error } = await supabase.from("lead_notes").insert({ lead_id: parsed.data.leadId, author_id: user.id, note: parsed.data.note });
+  const { user } = await requireStaff();
+  const { error } = await createServiceClient().from("lead_notes").insert({ lead_id: parsed.data.leadId, author_id: user.id, note: parsed.data.note });
   if (error) return { ok: false as const, message: "No se ha podido guardar la nota." };
-  await recordEvent(supabase, user.id, parsed.data.leadId, "note_added");
+  await recordEvent(user.id, parsed.data.leadId, "note_added");
   await recordAudit(user.id, "lead_note_added", parsed.data.leadId, {});
   return { ok: true as const };
 }

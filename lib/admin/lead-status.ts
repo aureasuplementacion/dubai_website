@@ -16,16 +16,30 @@ export type LeadStatus = (typeof leadStatuses)[number];
 
 export const leadStatusLabels: Record<LeadStatus, string> = {
   new: "Nuevo",
-  contact_requested: "Contacto solicitado",
-  called: "Llamada realizada",
+  contact_requested: "Pendiente de contactar",
+  called: "Atendido",
   qualified: "Cualificado",
-  awaiting_clinic_review: "Revisión clínica",
+  awaiting_clinic_review: "En valoración",
   proposal_sent: "Propuesta enviada",
   travel_planned: "Viaje planificado",
   completed: "Completado",
-  not_eligible: "No elegible",
-  lost: "Perdido",
+  not_eligible: "No apto",
+  lost: "Sin respuesta / perdido",
   cancelled: "Cancelado",
+};
+
+export const leadStatusGroups: Record<LeadStatus, "entrada" | "seguimiento" | "proceso" | "cierre"> = {
+  new: "entrada",
+  contact_requested: "seguimiento",
+  called: "seguimiento",
+  qualified: "proceso",
+  awaiting_clinic_review: "proceso",
+  proposal_sent: "proceso",
+  travel_planned: "proceso",
+  completed: "cierre",
+  not_eligible: "cierre",
+  lost: "cierre",
+  cancelled: "cierre",
 };
 
 export const leadStatusTones: Record<LeadStatus, "success" | "warning" | "danger" | "info" | "neutral"> = {
