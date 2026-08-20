@@ -19,7 +19,7 @@ Convertir `/admin/dashboard` en una bandeja comercial segura para que el equipo 
 - Enlaces de contacto a email, teléfono y Telegram/WhatsApp.
 - Exportación CSV exclusiva para `admin`.
 - Sin borrado físico de leads.
-- Editor editorial controlado para textos e imágenes; la gestión estructurada de especialidades, clínicas, profesionales y partners se incorpora por fases sin convertir el panel en un catálogo.
+- Gestión de especialidades, clínicas y profesionales fuera de esta primera versión.
 
 ## Auditoría técnica
 
