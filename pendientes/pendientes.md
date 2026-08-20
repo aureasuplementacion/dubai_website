@@ -32,7 +32,7 @@
 ## Prioridad P1 — Seguridad y producción
 
 - [ ] Rotar cualquier token que haya sido compartido fuera del gestor de secretos.
-- [ ] Configurar Upstash Redis para sustituir el rate limiting en memoria antes de producción.
+- [ ] Configurar Upstash Redis para sustituir el rate limiting en memoria antes de producción. Preview puede usar el fallback aislado.
 - [ ] Ejecutar pruebas RLS con los roles `anon`, `authenticated`, `manager` y `admin`.
 - [ ] Confirmar las URLs de redirección de Supabase Auth para Preview y producción.
 - [ ] Verificar un dominio propio en Resend y sustituir `onboarding@resend.dev` por un remitente del dominio.

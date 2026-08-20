@@ -12,7 +12,8 @@ export async function rateLimit(key: string, limit: number, windowSeconds: numbe
     const count = Number(result?.[0]?.result || 0);
     return { allowed: count <= limit, remaining: Math.max(0, limit - count), retryAfterSeconds: windowSeconds };
   }
-  if (process.env.NODE_ENV === "production") return { allowed: false, remaining: 0, retryAfterSeconds: windowSeconds };
+  const isVercelPreview = process.env.VERCEL_ENV === "preview";
+  if (process.env.NODE_ENV === "production" && !isVercelPreview) return { allowed: false, remaining: 0, retryAfterSeconds: windowSeconds };
   const now = Date.now();
   const current = localBuckets.get(key);
   if (!current || current.resetAt <= now) { localBuckets.set(key, { count: 1, resetAt: now + windowSeconds * 1000 }); return { allowed: true, remaining: limit - 1, retryAfterSeconds: windowSeconds }; }

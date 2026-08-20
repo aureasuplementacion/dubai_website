@@ -9,7 +9,7 @@ Esta auditoría cubre el código Next.js, el middleware, Supabase/RLS, formulari
 - El panel administrativo usa Supabase Auth con acceso por invitación y contraseña.
 - `/admin/dashboard` exige sesión y el servidor valida el perfil activo con rol `admin` o `manager`.
 - Las tablas de leads, notas y eventos mantienen RLS; los logs de auditoría no pueden ser falsificados por clientes autenticados.
-- Leads y chatbot tienen rate limiting. En producción requieren Upstash Redis; el fallback en memoria solo existe para desarrollo.
+- Leads y chatbot tienen rate limiting. En producción requieren Upstash Redis; Preview puede usar un fallback en memoria aislado para facilitar las pruebas.
 - La solicitud pública ya no acepta fecha ni franja horaria: el objetivo es solicitar contacto con un asesor.
 - Se añadieron cabeceras de seguridad, política de framing, control de contenido y política de permisos.
 - El service role de Supabase solo se utiliza en server actions y nunca se expone al cliente.
