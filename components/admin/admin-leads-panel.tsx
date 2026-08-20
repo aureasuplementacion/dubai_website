@@ -8,7 +8,7 @@ import { addLeadNote, exportAdminLeads, getAdminLeads, getLeadDetail, updateLead
 import { leadStatuses, leadStatusGroups, leadStatusLabels, leadStatusTones, type LeadStatus } from "@/lib/admin/lead-status";
 
 type Specialty = { id: string; name_es: string };
-type Summary = { total: number; newCount: number; contactCount: number; qualifiedCount: number; travelCount: number };
+type Summary = { total: number; newCount: number; contactCount: number; qualifiedCount: number; travelCount: number; overdueCount: number; unassignedCount: number };
 
 function formatDate(value: string | null) {
   if (!value) return "Sin fecha";
@@ -101,17 +101,19 @@ export function AdminLeadsPanel({ initialLeads, initialCount, initialTotalPages,
 
   return <>
     <section className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-      {[{ label: "Todos los leads", value: summary.total, tone: "neutral" as const }, { label: "Nuevos", value: summary.newCount, tone: "warning" as const }, { label: "Contacto", value: summary.contactCount, tone: "info" as const }, { label: "Cualificados", value: summary.qualifiedCount, tone: "info" as const }, { label: "Viajes", value: summary.travelCount, tone: "success" as const }].map((item) => <article key={item.label} className="rounded-[1.25rem] border border-border bg-white p-5 shadow-sm"><Status tone={item.tone}>{item.label}</Status><p className="mt-4 font-display text-4xl text-sapphire">{item.value}</p></article>)}
+      {[{ label: "Todos los leads", value: summary.total, tone: "neutral" as const }, { label: "Nuevos", value: summary.newCount, tone: "warning" as const }, { label: "Contacto", value: summary.contactCount, tone: "info" as const }, { label: "Cualificados", value: summary.qualifiedCount, tone: "info" as const }, { label: "Viajes", value: summary.travelCount, tone: "success" as const }, { label: "Acciones vencidas", value: summary.overdueCount, tone: "danger" as const }, { label: "Sin asignar", value: summary.unassignedCount, tone: "warning" as const }].map((item) => <article key={item.label} className="rounded-[1.25rem] border border-border bg-white p-5 shadow-sm"><Status tone={item.tone}>{item.label}</Status><p className="mt-4 font-display text-4xl text-sapphire">{item.value}</p></article>)}
     </section>
 
     <section className="mt-8 rounded-[1.5rem] border border-border bg-white p-5 shadow-soft md:p-7">
       <div className="flex flex-wrap items-center justify-between gap-4"><div><p className="eyebrow">Bandeja comercial</p><h2 className="mt-2 font-display text-3xl text-sapphire">Solicitudes de contacto</h2></div><div className="flex flex-wrap gap-2"><Button tone="secondary" type="button" onClick={() => refresh()} disabled={isPending}><RefreshCw size={16} aria-hidden="true" />Actualizar</Button>{isAdmin ? <Button tone="secondary" type="button" onClick={() => void handleExport()}><Download size={16} aria-hidden="true" />Exportar CSV</Button> : null}</div></div>
-      <form onSubmit={handleSearch} className="mt-7 grid gap-3 lg:grid-cols-[1.5fr_repeat(4,1fr)_auto]">
+      <form onSubmit={handleSearch} className="mt-7 grid gap-3 lg:grid-cols-[1.5fr_repeat(5,1fr)_auto]">
         <label className="relative block"><span className="sr-only">Buscar lead</span><Search size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted" aria-hidden="true" /><input name="query" defaultValue={filters.query || ""} placeholder="Nombre, email, teléfono o referencia" className="w-full rounded-xl border border-border bg-surface py-3 pl-11 pr-4 text-sm" /></label>
         <label><span className="sr-only">Estado</span><select value={filters.status || "all"} onChange={(event) => handleFilter("status", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm"><option value="all">Todos los estados</option>{leadStatuses.map((status) => <option key={status} value={status}>{leadStatusLabels[status]}</option>)}</select></label>
+        <label><span className="sr-only">Grupo de trabajo</span><select value={filters.group || "all"} onChange={(event) => handleFilter("group", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm"><option value="all">Todos los grupos</option><option value="entrada">Entrada</option><option value="seguimiento">Seguimiento</option><option value="proceso">Proceso</option><option value="cierre">Cierre</option></select></label>
         <label><span className="sr-only">Especialidad</span><select value={filters.specialtyId || ""} onChange={(event) => handleFilter("specialtyId", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm"><option value="">Especialidad</option>{specialties.map((specialty) => <option key={specialty.id} value={specialty.id}>{specialty.name_es}</option>)}</select></label>
         <label><span className="sr-only">Desde</span><input type="date" value={filters.from || ""} onChange={(event) => handleFilter("from", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm" /></label>
         <label><span className="sr-only">Hasta</span><input type="date" value={filters.to || ""} onChange={(event) => handleFilter("to", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm" /></label>
+        <label><span className="sr-only">Atención</span><select value={filters.attention || ""} onChange={(event) => handleFilter("attention", event.target.value)} className="w-full rounded-xl border border-border bg-surface px-3 py-3 text-sm"><option value="">Cualquier prioridad</option><option value="overdue">Acciones vencidas</option></select></label>
         <Button type="submit" disabled={isPending}><Search size={16} aria-hidden="true" />Buscar</Button>
       </form>
       {message ? <p role="status" className="mt-4 rounded-xl border border-info/20 bg-info/10 px-4 py-3 text-sm text-info">{message}</p> : null}

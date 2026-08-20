@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 import { requireStaff } from "@/lib/auth/require-staff";
-import { leadStatuses, type LeadStatus } from "@/lib/admin/lead-status";
+import { leadStatuses, leadStatusGroups, type LeadStatus, type LeadStatusGroup } from "@/lib/admin/lead-status";
 
 export type AdminLead = {
   id: string;
@@ -30,7 +30,7 @@ export type AdminProfile = { id: string; full_name: string | null; email: string
 export type LeadNote = { id: string; note: string; author_name: string | null; created_at: string };
 export type LeadEvent = { id: string; event_type: string; metadata: Record<string, unknown>; actor_name: string | null; created_at: string };
 export type LeadDetail = { lead: AdminLead; notes: LeadNote[]; events: LeadEvent[] };
-export type LeadFilters = { query?: string; status?: LeadStatus | "all"; specialtyId?: string; source?: string; from?: string; to?: string; page?: number; pageSize?: number };
+export type LeadFilters = { query?: string; status?: LeadStatus | "all"; group?: LeadStatusGroup | "all"; attention?: "overdue"; specialtyId?: string; source?: string; from?: string; to?: string; page?: number; pageSize?: number };
 
 const statusSchema = z.enum(leadStatuses);
 const leadIdSchema = z.string().uuid();
@@ -101,6 +101,11 @@ export async function getAdminLeads(filters: LeadFilters = {}) {
   const search = filters.query?.trim().replace(/[(),]/g, " ");
   if (search) query = query.or(`reference.ilike.%${search}%,customer_name.ilike.%${search}%,customer_email.ilike.%${search}%,customer_phone.ilike.%${search}%`);
   if (filters.status && filters.status !== "all") query = query.eq("status", filters.status);
+  if (filters.group && filters.group !== "all") {
+    const statuses = leadStatuses.filter((status) => leadStatusGroups[status] === filters.group);
+    query = query.in("status", statuses);
+  }
+  if (filters.attention === "overdue") query = query.lt("next_action_at", new Date().toISOString()).not("next_action_at", "is", null).not("status", "in", "(completed,not_eligible,lost,cancelled)");
   if (filters.specialtyId) query = query.eq("specialty_id", filters.specialtyId);
   if (filters.source) query = query.eq("source", filters.source);
   if (filters.from) query = query.gte("created_at", `${filters.from}T00:00:00.000Z`);
@@ -183,5 +188,10 @@ export async function getAdminLeadSummary() {
     ...statuses.map((status) => supabase.from("leads").select("id", { count: "exact", head: true }).eq("status", status)),
   ]);
   if (totalResult.error || results.some((result) => result.error)) return { ok: false as const, message: "No se han podido cargar los indicadores." };
-  return { ok: true as const, summary: { total: totalResult.count || 0, newCount: results[0].count || 0, contactCount: results[1].count || 0, qualifiedCount: results[2].count || 0, travelCount: results[3].count || 0 } };
+  const [overdueResult, unassignedResult] = await Promise.all([
+    supabase.from("leads").select("id", { count: "exact", head: true }).lt("next_action_at", new Date().toISOString()).not("next_action_at", "is", null).not("status", "in", "(completed,not_eligible,lost,cancelled)"),
+    supabase.from("leads").select("id", { count: "exact", head: true }).is("assigned_to", null).not("status", "in", "(completed,not_eligible,lost,cancelled)"),
+  ]);
+  if (overdueResult.error || unassignedResult.error) return { ok: false as const, message: "No se han podido cargar los indicadores." };
+  return { ok: true as const, summary: { total: totalResult.count || 0, newCount: results[0].count || 0, contactCount: results[1].count || 0, qualifiedCount: results[2].count || 0, travelCount: results[3].count || 0, overdueCount: overdueResult.count || 0, unassignedCount: unassignedResult.count || 0 } };
 }

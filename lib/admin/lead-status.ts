@@ -13,6 +13,7 @@ export const leadStatuses = [
 ] as const;
 
 export type LeadStatus = (typeof leadStatuses)[number];
+export type LeadStatusGroup = "entrada" | "seguimiento" | "proceso" | "cierre";
 
 export const leadStatusLabels: Record<LeadStatus, string> = {
   new: "Nuevo",
@@ -28,7 +29,7 @@ export const leadStatusLabels: Record<LeadStatus, string> = {
   cancelled: "Cancelado",
 };
 
-export const leadStatusGroups: Record<LeadStatus, "entrada" | "seguimiento" | "proceso" | "cierre"> = {
+export const leadStatusGroups: Record<LeadStatus, LeadStatusGroup> = {
   new: "entrada",
   contact_requested: "seguimiento",
   called: "seguimiento",
