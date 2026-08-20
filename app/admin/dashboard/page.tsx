@@ -16,7 +16,7 @@ export default async function AdminDashboardPage() {
   const initialCount = initialResult.ok ? initialResult.count : 0;
   const initialTotalPages = initialResult.ok ? initialResult.totalPages : 1;
   const profiles = profileResult.ok ? profileResult.profiles : [];
-  const summary = summaryResult.ok ? summaryResult.summary : { total: initialCount, newCount: 0, contactCount: 0, qualifiedCount: 0, travelCount: 0, overdueCount: 0, unassignedCount: 0 };
+  const summary = summaryResult.ok ? summaryResult.summary : { total: initialCount, newCount: 0, contactCount: 0, qualifiedCount: 0, travelCount: 0, unassignedCount: 0 };
 
   return <main className="container-shell py-12 md:py-16">
     <div className="flex flex-wrap items-end justify-between gap-5">
