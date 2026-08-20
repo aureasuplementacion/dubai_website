@@ -16,16 +16,16 @@ El MVP incluirá:
 
 - Catálogo bilingüe de servicios con búsqueda, filtros y paginación.
 - Página de detalle con imágenes, vídeo externo opcional, beneficios, duración y precio de referencia.
-- Solicitud de cita con fecha, hora, datos de contacto, transporte y adjuntos.
-- Pantalla de confirmación y notificaciones por email.
-- Enlace flotante a WhatsApp con mensaje predefinido.
+- Solicitud de contacto con datos mínimos, consentimiento y mensaje opcional.
+- Pantalla de confirmación y notificaciones bilingües por email.
+- Enlace contextual a WhatsApp y derivación desde el chatbot cuando la persona quiera hablar con un asesor.
 - Panel administrativo protegido para servicios, categorías, solicitudes, agenda y usuarios.
 - Roles `admin` y `manager` con permisos diferenciados.
-- Disponibilidad basada en slots, retención temporal y aprobación administrativa.
+- Pipeline de leads con estados comerciales y eventos de seguimiento.
 - Analítica básica con Plausible sin datos personales.
 - Despliegue Preview en Vercel con Supabase, Resend y datos demo separados.
 
-Quedan fuera del MVP los pagos, el comercio electrónico, el chatbot de IA, la sincronización con calendarios, la gestión avanzada por profesional, el CRM y la reprogramación autónoma por parte del cliente.
+Quedan fuera del MVP los pagos, el comercio electrónico, la sincronización con calendarios, la API de WhatsApp Business, la gestión avanzada por profesional, el CRM y la reprogramación autónoma por parte del cliente.
 
 ## 3. Fases de implementación
 
@@ -63,25 +63,23 @@ Quedan fuera del MVP los pagos, el comercio electrónico, el chatbot de IA, la s
 - Implementar la home orientada a conversión, siguiendo `design-reference.md`.
 - Crear catálogo con búsqueda, filtros por categoría, orden y paginación.
 - Crear detalle de servicio con galería, vídeo externo opcional, beneficios, duración, precio de referencia y CTA.
-- Implementar formulario de solicitud con servicio, fecha, hora, contacto, transporte, mensaje y archivos.
+- Implementar formulario de solicitud de contacto con especialidad, datos de contacto, acompañante, mensaje y consentimiento.
 - Añadir validación Zod en cliente y servidor mediante React Hook Form y Server Actions.
 - Incorporar honeypot, rate limiting y mensajes de error localizados.
-- Crear pantalla de confirmación con resumen, estado pendiente y alternativas de contacto.
-- Añadir botón flotante de WhatsApp sin presentarlo como chatbot de IA.
+- Crear pantalla de confirmación con referencia, estado pendiente y alternativas de contacto.
+- Añadir botón flotante y enlaces contextuales de WhatsApp sin presentar el canal como chatbot de IA.
 - Mantener todos los textos, datos de contacto, imágenes, precios y ubicación como contenido sustituible.
 
-### Fase 4 — Flujo de citas
+### Fase 4 — Captación y contacto comercial
 
-- Consultar o calcular slots según la zona horaria de la sede.
-- Mostrar únicamente slots activos, disponibles y no expirados.
-- Validar nuevamente en servidor el servicio, la sede y el slot seleccionado.
-- Crear la solicitud en estado `pending`.
-- Cambiar el slot a `held` con expiración configurable.
-- Guardar los adjuntos en un bucket privado con rutas únicas.
-- Liberar slots cuando una solicitud sea cancelada o expire el hold.
-- Confirmar solicitudes mediante operación transaccional o idempotente.
-- Impedir dos reservas confirmadas para el mismo slot mediante restricción o transacción.
-- Gestionar las transiciones `pending`, `contacted`, `confirmed`, `completed` y `cancelled`.
+- Guardar solicitudes públicas de llamada en `leads` con estado inicial `new`.
+- Registrar eventos de creación en `lead_events` sin incluir datos personales en metadatos.
+- Enviar confirmación al cliente y aviso interno mediante Resend en Preview.
+- Conservar el lead aunque Resend falle y registrar el error únicamente en servidor.
+- Generar enlaces `wa.me` con idioma y contexto de origen, ocultándolos cuando no exista un número válido.
+- Derivar el chatbot a WhatsApp por intención explícita o error del servicio, sin persistir conversaciones ni crear leads automáticamente.
+- Preparar eventos de Plausible sin datos personales; la activación dependerá del dominio configurado.
+- Mantener las tablas de agenda y reservas como legacy, fuera del flujo público actual.
 
 ### Fase 5 — Panel administrativo
 
@@ -100,15 +98,13 @@ Quedan fuera del MVP los pagos, el comercio electrónico, el chatbot de IA, la s
 
 - Crear proyecto o cuenta Resend para el entorno de demo.
 - Usar remitente de prueba hasta configurar el dominio definitivo.
-- Crear plantillas React Email bilingües para:
+- Crear notificaciones bilingües para:
   - Solicitud recibida por el cliente.
   - Solicitud recibida por el equipo administrativo.
-  - Solicitud confirmada.
-  - Invitación administrativa.
-  - Recuperación de contraseña gestionada por Supabase.
+  - Derivación de seguimiento comercial, cuando exista panel administrativo.
 - Evitar adjuntar archivos del cliente en emails.
 - Registrar errores de envío sin duplicar solicitudes ni bloquear innecesariamente el flujo principal.
-- Configurar Plausible con los eventos `catalog_viewed`, `service_viewed`, `booking_started`, `booking_submitted`, `booking_confirmed` y `whatsapp_clicked`.
+- Configurar Plausible con los eventos `specialty_viewed`, `clinic_viewed`, `professional_viewed`, `lead_started`, `lead_submitted`, `lead_confirmation_viewed`, `chat_opened`, `chat_handoff` y `whatsapp_clicked`.
 - No enviar a logs ni analítica nombre, teléfono, email, mensaje, archivos ni otros datos personales.
 
 ## 4. Entornos y despliegue

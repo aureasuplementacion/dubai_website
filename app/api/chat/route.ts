@@ -1,6 +1,8 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 import { getRequestIp, rateLimit } from "@/lib/security/rate-limit";
+import { getWhatsAppUrl } from "@/lib/contact/whatsapp";
+import { getTelegramUrl } from "@/lib/contact/telegram";
 
 export const runtime = "nodejs";
 
@@ -33,6 +35,10 @@ function cleanMessages(value: unknown): ChatMessage[] {
   return value.filter((item): item is ChatMessage => item && typeof item === "object" && (item as ChatMessage).role && ["user", "assistant"].includes((item as ChatMessage).role) && typeof (item as ChatMessage).content === "string").slice(-12).map((item) => ({ role: item.role, content: item.content.trim().slice(0, 1000) })).filter((item) => item.content.length > 0);
 }
 
+function requestsHumanSupport(message: string) {
+  return /whats ?app|asesor|asesora|persona|llamada|contact(ar|o)|hablar con alguien|quiero avanzar|me interesa/i.test(message);
+}
+
 export async function POST(request: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return NextResponse.json({ error: "Chatbot API is not configured." }, { status: 503 });
@@ -46,7 +52,12 @@ export async function POST(request: Request) {
     const locale = body.locale === "en" ? "English" : "Spanish";
     const client = new OpenAI({ apiKey });
     const response = await client.responses.create({ model: process.env.OPENAI_CHAT_MODEL || "gpt-5.4-nano", instructions: `${baseInstructions}\n\nResponde en ${locale}.`, input: messages, max_output_tokens: 220, store: false });
-    return NextResponse.json({ message: response.output_text.trim() || "Puedo ayudarte a solicitar una llamada con un asesor." });
+    const message = response.output_text.trim() || "Puedo ayudarte a solicitar una llamada con un asesor.";
+    const localeValue = body.locale === "en" ? "en" : "es";
+    const whatsapp = requestsHumanSupport(messages[messages.length - 1].content) ? getWhatsAppUrl({ locale: localeValue, source: "chatbot" }) : null;
+    const telegram = !whatsapp && requestsHumanSupport(messages[messages.length - 1].content) ? getTelegramUrl({ locale: localeValue, source: "chatbot" }) : null;
+    const handoff = whatsapp ? { channel: "whatsapp" as const, href: whatsapp } : telegram ? { channel: "telegram" as const, href: telegram } : null;
+    return NextResponse.json({ message, ...(handoff ? { handoff: { ...handoff, reason: "user_request" as const } } : {}) });
   } catch (error) {
     console.error("OpenAI chatbot error", error);
     if (error instanceof OpenAI.APIError && error.status === 429) return NextResponse.json({ error: "The chatbot quota is temporarily unavailable." }, { status: 503 });

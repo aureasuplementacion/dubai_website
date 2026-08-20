@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { submitLead, type LeadActionResult } from "@/lib/actions/leads";
 import { publishedSpecialties } from "@/lib/catalog/data";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/analytics/events";
 
 const initialState: LeadActionResult | null = null;
 
@@ -12,6 +13,8 @@ export function BookingForm({ defaultSpecialty, defaultClinic }: { defaultSpecia
   const locale = useLocale();
   const t = useTranslations("Lead");
   const [state, action, pending] = useActionState((_previous: LeadActionResult | null, formData: FormData) => submitLead(formData), initialState);
+  useEffect(() => { trackEvent("lead_started", { source: defaultClinic ? `clinic:${defaultClinic}` : "website" }); }, [defaultClinic]);
+  useEffect(() => { if (state?.ok) { trackEvent("lead_submitted"); trackEvent("lead_confirmation_viewed"); } }, [state]);
   if (state?.ok) return <div className="rounded-[2rem] border border-success/20 bg-success/5 p-8 shadow-soft"><p className="eyebrow text-success">{t("successEyebrow")}</p><h2 className="mt-3 font-display text-3xl text-sapphire">{t("successTitle")}</h2><p className="mt-3 text-muted">{t("successDescription", { reference: state.reference })}</p></div>;
   const fieldClass = "mt-2 min-h-12 w-full rounded-xl border border-border bg-white px-4 text-ink transition duration-fast focus:border-sapphire focus:ring-2 focus:ring-champagne/40";
   const isEnglish = locale === "en";

@@ -45,7 +45,7 @@ public/images/
 | IMG-10 | `hotel/the-g-hotels-exterior.webp` | Página de alojamiento | 1600×1000 | 900×1100 | WebP |
 | IMG-11 | `hotel/the-g-hotels-room.webp` | Habitaciones y opciones de estancia | 1400×1000 | 900×1100 | WebP |
 | IMG-12 | `hotel/the-g-hotels-wellness.webp` | Gimnasio, spa y bienestar | 1400×1000 | 900×1100 | WebP |
-| IMG-13 | `transport/private-luxury-transfer.webp` | Página de transporte | 1600×1000 | 900×1100 | WebP |
+| IMG-13 | `transport/hotel-transfer.webp` | Página de transporte y vehículo privado | 1600×1000 | 900×1100 | WebP |
 | IMG-14 | `trust/aura-advisor-call.webp` | CTA de contacto y asesoramiento | 1400×1000 | 900×1100 | WebP |
 
 ## Imágenes por especialidad

@@ -92,7 +92,10 @@ Eventos no sensibles:
 - `professional_viewed`
 - `lead_started`
 - `lead_submitted`
+- `lead_confirmation_viewed`
 - `call_requested`
+- `chat_opened`
+- `chat_handoff`
 - `whatsapp_clicked`
 
 No enviar nombre, teléfono, email, mensaje, fotografías ni informes.
