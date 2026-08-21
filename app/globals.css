@@ -9,13 +9,13 @@
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --color-brand-primary: #17324a;
   --color-brand-primary-strong: #0d1f2d;
-  --color-brand-accent: #b99055;
+  --color-brand-accent: #8b642f;
   --color-brand-accent-soft: #f1e7d8;
   --color-bg-canvas: #fbfaf7;
   --color-bg-subtle: #f2efe9;
   --color-bg-deep: #102532;
   --color-text-primary: #17232c;
-  --color-text-secondary: #65717a;
+  --color-text-secondary: #5c6871;
   --color-border: #dedbd4;
   --color-success: #247a56;
   --color-warning: #9a6a12;
@@ -47,6 +47,9 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .image-frame:hover img { transform: scale(1.012); }
 .eyebrow { color: var(--color-brand-accent); font-size: .72rem; font-weight: 800; letter-spacing: .22em; line-height: 1.4; text-transform: uppercase; }
 .eyebrow-on-dark { color: #e5c999; }
+.bg-deep .text-champagne, .bg-sapphire .text-champagne { color: #e5c999; }
+.bg-deep .border-champagne, .bg-sapphire .border-champagne { border-color: #e5c999; }
+.text-white\/45 { color: rgb(255 255 255 / .62); }
 .reveal { animation: reveal-up var(--motion-slow) var(--motion-standard) both; }
 
 @keyframes reveal-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }

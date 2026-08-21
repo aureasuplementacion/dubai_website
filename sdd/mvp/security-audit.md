@@ -1,5 +1,7 @@
 # Auditoría de seguridad y estabilidad
 
+> Documento técnico de soporte. Para el estado final, responsables y criterios de publicación, consultar [`preproduccion-final.md`](./preproduccion-final.md).
+
 ## Alcance
 
 Esta auditoría cubre el código Next.js, el middleware, Supabase/RLS, formularios públicos, chatbot, configuración de despliegue y gestión de secretos. La validación de servicios externos se limita a comprobaciones seguras y no destructivas.

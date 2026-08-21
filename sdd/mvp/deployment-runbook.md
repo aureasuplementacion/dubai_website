@@ -1,5 +1,7 @@
 # Runbook de despliegue
 
+> Este runbook se ejecuta junto con la checklist y los bloqueadores de [`preproduccion-final.md`](./preproduccion-final.md).
+
 ## Preview
 
 1. Instalar dependencias con `npm ci`.

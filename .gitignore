@@ -11,3 +11,5 @@ npm-debug.log*
 .secrets/
 supabase/.temp/
 .research/
+test-results/
+playwright-report/

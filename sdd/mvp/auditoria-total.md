@@ -1,5 +1,7 @@
 # Auditoría total del proyecto — Aura Estética
 
+> Documento histórico de estado general. La referencia operativa de preproducción vigente es [`preproduccion-final.md`](./preproduccion-final.md).
+
 Fecha de auditoría: 20 de agosto de 2026  
 Rama revisada: `phase-4-preview`  
 Objetivo: cerrar la Preview como base técnica estable antes de producción.
