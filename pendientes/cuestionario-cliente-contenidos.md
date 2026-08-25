@@ -1,118 +1,141 @@
-# Cuestionario para completar los contenidos de Aura Estética
+# Brief de contenidos provisional — Aura Estética
 
-Este documento sirve para preparar los textos definitivos, las imágenes y los testimonios de la web. No es necesario responder con lenguaje técnico. Cuando una respuesta no esté confirmada, podemos dejarla como pendiente.
+Documento preparado por Codex a partir del proyecto actual. El cliente solo tendrá que revisar lo marcado como **pendiente de confirmación** y entregar las fotografías nuevas y los avatares de IA cuando estén disponibles.
 
-## 1. Posicionamiento de Aura Estética
+## 1. Posicionamiento
 
-1. ¿Cómo describirías Aura Estética en una frase?
-2. ¿Aura es una agencia de coordinación, una marca comercial, un intermediario autorizado o forma parte del centro sanitario?
-3. ¿Desde qué ciudades o países atendéis actualmente?
-4. ¿A qué tipo de paciente queréis dirigirnos primero?
-5. ¿Qué tres razones deberían hacer que alguien contacte con Aura y no directamente con una clínica?
-6. ¿Qué promesas o palabras no queréis utilizar nunca? Por ejemplo: “mejor”, “garantizado”, “sin riesgo”, “resultado asegurado” o “barato”.
-7. ¿Qué tono preferís: cercano, premium, médico, familiar, directo o una combinación?
+**Descripción de trabajo:** Aura Estética es una marca de orientación y coordinación para personas que valoran recibir atención sanitaria en Turquía, con acompañamiento desde España.
 
-## 2. Las áreas que sí se publican
+**Qué hace Aura:** explica el proceso, recoge la necesidad inicial, coordina la conversación con el centro, ayuda a ordenar el viaje y presenta la información disponible de forma clara.
 
-Para cada área, indicad qué servicios están realmente disponibles y cuáles deben quedar fuera:
+**Qué no hace Aura:** no diagnostica, no indica tratamientos, no sustituye al equipo sanitario y no garantiza resultados, habitaciones, precios ni disponibilidad.
 
-- Capilar y cuero cabelludo.
-- Odontología.
-- Cirugía estética y corporal.
-- Bariátrica y metabolismo.
+**Público inicial:** personas residentes en España que valoran tratamientos capilares, odontológicos, cirugía estética y corporal o atención bariátrica/metabólica en Turquía. También pueden viajar acompañantes.
 
-Para cada una:
+**Diferencia principal:** acompañamiento humano en español, claridad antes de viajar y coordinación práctica sin presión comercial.
 
-1. ¿Qué procedimientos se pueden consultar hoy?
-2. ¿Qué procedimientos no ofrecéis aunque aparezcan en catálogos de clínicas?
-3. ¿Qué especialista o centro los realiza?
-4. ¿Qué pruebas, fotografías o informes necesita el equipo para una primera valoración?
-5. ¿Qué parte del proceso puede hacerse desde España?
-6. ¿Cuántos días suele necesitar el paciente en Turquía? Indicad un rango, no una promesa cerrada.
-7. ¿Qué seguimiento se ofrece después del regreso?
-8. ¿Existe algún criterio habitual para rechazar o aplazar un caso?
+**Tono:** cercano, sereno, premium y claro. Evitar lenguaje agresivo de venta, urgencia artificial, superlativos médicos y promesas de resultados.
 
-## 3. Centro sanitario y profesionales
+**Frase de marca provisional:** “Claridad antes de viajar.”
 
-1. Nombre legal completo del centro y dirección confirmada.
-2. ¿Qué autorización de turismo sanitario internacional tiene el centro? Adjuntar documento o enlace oficial.
-3. ¿Qué acreditaciones, certificaciones o registros profesionales se pueden publicar?
-4. ¿Qué médicos pueden aparecer en la web? Nombre, especialidad, cargo, número de registro y fotografía autorizada.
-5. ¿Quién decide la indicación clínica: Aura, la clínica o el médico responsable?
-6. ¿Qué información debe recibir el paciente sobre riesgos, alternativas, contraindicaciones y seguimiento?
-7. ¿Cómo se atienden las incidencias después del alta o una vez el paciente vuelve a España?
-8. ¿Qué idiomas se hablan en la clínica y durante los traslados?
+## 2. Áreas publicadas
 
-## 4. Propuestas, precios y límites
+Las cuatro áreas iniciales son:
 
-1. ¿Se publicarán precios orientativos o solo propuestas individuales?
-2. ¿Qué incluye exactamente una propuesta: consulta, pruebas, intervención, medicación, hotel, traslados, intérprete, acompañante y seguimiento?
-3. ¿Qué conceptos pueden cobrarse aparte?
-4. ¿Cómo se informa de cambios de precio, disponibilidad o servicios no confirmados?
-5. ¿Cuál es la política de cancelación y devolución?
-6. ¿Quién factura cada parte: Aura, el centro, el hotel y el proveedor de transporte?
-7. ¿Qué texto legal debe acompañar a los precios y a las imágenes de resultados?
+1. **Capilar y cuero cabelludo** — restauración capilar, barba, cejas y opciones complementarias, siempre sujetas a diagnóstico y valoración profesional.
+2. **Odontología** — implantes, rehabilitación, estética dental, coronas, carillas y ortodoncia según estudio odontológico.
+3. **Cirugía estética y corporal** — opciones faciales, corporales y mamarias sujetas a exploración, indicación y plan de recuperación.
+4. **Bariátrica y metabolismo** — orientación inicial sobre manga gástrica, bypass y seguimiento nutricional cuando el equipo clínico lo considere adecuado.
 
-## 5. Viaje, alojamiento y transporte
+**Eliminado:** oftalmología. No debe aparecer en la web, catálogo, chatbot, clínica ni comunicaciones comerciales.
 
-1. ¿Qué hoteles se pueden mencionar actualmente?
-2. ¿Qué servicios del hotel están confirmados y cuáles son solo representativos?
-3. ¿Queréis mostrar únicamente “alojamiento sujeto a disponibilidad”, sin tipos de habitación ni fotografías de habitaciones?
-4. ¿Qué traslados están incluidos en cada tipo de propuesta?
-5. ¿Qué proveedor, vehículos, capacidad de equipaje y accesibilidad están confirmados?
-6. ¿Hay servicio para acompañantes?
-7. ¿Quién recibe al paciente en el aeropuerto y cómo puede localizarlo?
-8. ¿Qué ocurre si el vuelo se retrasa o se modifica?
+**Criterio de redacción:** cada área debe explicar qué se puede explorar, qué información hace falta, quién decide la idoneidad, qué preparación puede existir, cuánto depende del caso y cómo se plantea el seguimiento.
 
-## 6. Testimonios e imágenes
+**Pendiente de confirmación:** lista exacta de procedimientos que el centro acepta actualmente, médicos responsables, pruebas necesarias y tiempos orientativos por procedimiento.
 
-No publicaremos testimonios reales ni fotografías identificables sin autorización expresa.
+## 3. Centro sanitario
 
-1. Nombre o iniciales que desea utilizar el paciente.
-2. País de residencia.
-3. Área o procedimiento realizado.
-4. Fecha aproximada del viaje.
-5. ¿Qué problema tenía antes de contactar con Aura?
-6. ¿Qué parte del acompañamiento le resultó más útil?
-7. ¿Qué resultado o experiencia puede describir sin prometer resultados a otras personas?
-8. ¿Autoriza texto, fotografía, vídeo, nombre, iniciales y publicación en web/redes? Marcar cada permiso por separado.
-9. ¿Existe autorización para utilizar imágenes de antes y después? Adjuntar consentimiento específico.
-10. ¿El testimonio ha sido revisado por el paciente y aprobado por la clínica cuando corresponda?
+**Centro publicado:** BHT CLINIC Istanbul Tema Hospital.
 
-## 7. Preguntas frecuentes que debemos responder
+**Descripción de trabajo:** hospital privado en Estambul con unidad de pacientes internacionales y coordinación para personas que viajan desde España.
 
-1. ¿Es seguro viajar a Turquía para recibir atención sanitaria?
-2. ¿Cómo sé quién me va a tratar?
-3. ¿Puedo hablar con el médico antes de viajar?
-4. ¿Qué documentación debo enviar?
-5. ¿Puedo viajar con acompañante?
-6. ¿Cuánto tiempo debo quedarme?
-7. ¿Qué pasa si necesito atención después de volver a España?
-8. ¿Qué ocurre si la clínica determina que no soy candidato?
-9. ¿Puedo cambiar de opinión después de recibir la propuesta?
-10. ¿Qué datos médicos no debo enviar por WhatsApp, email o formulario?
+**Información actualmente publicada como contexto:** hospital de 55.000 m² y 19 plantas, 20 quirófanos, unidades de cuidados intensivos, unidad internacional y más de 100 médicos junto con más de 1.000 profesionales.
 
-## 8. Material que necesitamos recibir
+**Quién decide:** el equipo sanitario y el profesional responsable del centro. Aura solo coordina y explica la información disponible.
 
-- Logotipo y versiones autorizadas.
-- Fotografías propias y permisos de uso.
-- Fichas y autorizaciones del centro.
-- Datos verificables de los médicos.
-- Lista actual de procedimientos y servicios.
-- Modelo de propuesta económica con inclusiones y exclusiones.
-- Política de cancelación, privacidad y reclamaciones.
+**Pendiente de confirmación antes de publicar como dato definitivo:** autorización oficial de turismo sanitario, acreditaciones, nombres y registros de médicos, fotografías profesionales, idiomas disponibles, protocolo de incidencias y seguimiento después del regreso.
+
+## 4. Propuestas y precios
+
+**Modelo recomendado:** no publicar precios cerrados por habitación ni promesas de paquetes estándar. Presentar una propuesta individual después de revisar la necesidad y la disponibilidad.
+
+**La propuesta debe separar:**
+
+- servicios sanitarios del centro;
+- pruebas, medicación y revisiones;
+- coordinación de Aura;
+- alojamiento;
+- transporte y traslados;
+- intérprete o acompañamiento;
+- servicios para acompañantes;
+- conceptos no incluidos.
+
+**Regla de comunicación:** una condición solo se presenta como confirmada cuando aparece por escrito en la propuesta final.
+
+**Pendiente de confirmación:** quién factura cada servicio, política de cancelación, devoluciones, suplementos, forma de pago y texto legal aplicable.
+
+## 5. Alojamiento
+
+**Hotel de referencia:** The G Hotels Istanbul.
+
+**Contenido aprobado para la web:** puede formar parte del itinerario confirmado; la disponibilidad, las condiciones y el precio se revisan por escrito antes de viajar.
+
+**Servicios que se pueden mencionar como opciones publicadas:** recepción y atención hotelera, restauración, espacios de bienestar y ubicación sujeta a disponibilidad.
+
+**Decisión del cliente aplicada:** no se publican tipos de habitación, comparativas Superior/Deluxe/Suite ni fotografías de habitaciones como garantía de calidad. El alojamiento concreto depende de disponibilidad, necesidades del viaje y propuesta final.
+
+**Pendiente de confirmación:** hotel definitivo por paciente, categoría contratada, accesibilidad, régimen de comidas, distancia al centro, condiciones de acompañantes y política de cambios.
+
+## 6. Transporte
+
+**Propuesta de contenidos:** coordinación de recogida en aeropuerto, conexión con el hotel y traslados privados entre los puntos confirmados del itinerario.
+
+**No publicar sin confirmación:** proveedor, marca o modelo del vehículo, capacidad, equipaje, accesibilidad, horarios, precio y disponibilidad.
+
+**Incidencias:** el paciente debe recibir un contacto operativo y un procedimiento para retrasos o cambios de vuelo.
+
+**Pendiente de confirmación:** proveedor definitivo, teléfono de emergencia, punto de encuentro del aeropuerto, cobertura para acompañantes y condiciones de espera.
+
+## 7. Testimonios
+
+La sección ya está creada con tres textos e imágenes provisionales. Se sustituirá cuando haya material real.
+
+**Regla editorial:** todos los testimonios actuales están marcados como ejemplo y no representan pacientes reales.
+
+**Cuando lleguen los materiales:** usar nombre o iniciales autorizadas, país, área tratada, fecha aproximada, experiencia de coordinación y consentimiento separado para texto, foto, vídeo y redes sociales.
+
+**No utilizar testimonios para:** prometer resultados, asegurar ausencia de riesgos, afirmar que un tratamiento sirve para todos o comparar precios como argumento clínico.
+
+**Pendiente visual:** fotografías nuevas del cliente y avatares de IA. Hasta recibirlos, se mantienen imágenes representativas del proyecto y no se presentan como pacientes reales.
+
+## 8. Preguntas frecuentes provisionales
+
+**¿Aura es una clínica?** No. Aura orienta y coordina la comunicación y el viaje; la valoración y la atención sanitaria corresponden al centro y al equipo responsable.
+
+**¿El tratamiento está garantizado?** No. La idoneidad, el plan, las fechas y los servicios dependen de la valoración clínica, la disponibilidad y la propuesta escrita.
+
+**¿Puedo hablar con el equipo antes de viajar?** La coordinación debe solicitar una primera conversación con el centro cuando el caso y la información disponible lo permitan.
+
+**¿Qué información se necesita?** La estrictamente necesaria para iniciar la orientación. No se deben enviar informes, fotografías médicas, documentos de identidad ni datos sensibles por el formulario general.
+
+**¿Puedo viajar con acompañante?** Sí, puede valorarse, pero alojamiento, transporte y costes deben confirmarse por escrito.
+
+**¿Cuánto dura el viaje?** Depende del área, el procedimiento, las pruebas y la valoración del centro. No se publican duraciones cerradas como garantía.
+
+**¿Qué pasa después de volver a España?** Aura puede coordinar la información de seguimiento facilitada por el centro. La atención clínica corresponde al equipo sanitario y cualquier urgencia debe dirigirse a los servicios adecuados.
+
+**¿Qué ocurre si no soy candidato?** El centro puede determinar que una opción no es adecuada. La orientación no obliga a contratar ni a viajar.
+
+## 9. Material pendiente
+
+- Fotografías nuevas del cliente.
+- Avatares de IA cuando estén aprobados.
+- Fotografías reales del centro, hotel y transporte con permisos de uso.
 - Consentimientos de testimonios e imágenes.
-- Teléfonos, horarios y canales de atención.
-- Idiomas definitivos de la web.
+- Autorizaciones y acreditaciones del centro.
+- Datos profesionales de médicos que vayan a aparecer.
+- Procedimientos definitivos por área.
+- Propuestas, inclusiones, exclusiones y política de cancelación.
+- Teléfonos, horarios y contacto operativo.
+- Revisión legal y sanitaria final.
 
-## 9. Aprobación final
+## 10. Validación mínima del cliente
 
-Persona que revisa los contenidos: ____________________
+El cliente solo necesita confirmar:
 
-Cargo: ____________________
-
-Fecha: ____________________
-
-¿Qué contenidos requieren revisión legal o sanitaria antes de publicarse? ____________________
-
-Firma o confirmación: ____________________
+1. Que las cuatro áreas publicadas son capilar, odontología, cirugía estética/corporal y bariátrica/metabolismo.
+2. Que no se vuelve a publicar oftalmología.
+3. Que el alojamiento se comunica sin tipos de habitación ni garantía de calidad.
+4. Que los tres testimonios actuales son solo ejemplos.
+5. Que las fotografías y avatares se añadirán después.
+6. Que los datos legales, médicos, económicos y de seguimiento quedan pendientes hasta recibir confirmación oficial.
