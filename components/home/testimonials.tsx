@@ -3,14 +3,14 @@ import { media } from "@/lib/media/registry";
 
 const testimonials = {
   es: [
-    { quote: "Desde la primera llamada entendí qué información necesitaba y cuáles eran los siguientes pasos.", name: "Nombre de ejemplo", detail: "Paciente de España · Testimonio pendiente de validación", image: media.trust.call },
-    { quote: "Me ayudó tener una persona de contacto para ordenar el viaje y hablar con el centro.", name: "Nombre de ejemplo", detail: "Paciente internacional · Testimonio pendiente de validación", image: media.trust.documents },
-    { quote: "La información estaba explicada con calma y pude decidir sin sentir presión.", name: "Nombre de ejemplo", detail: "Paciente de España · Testimonio pendiente de validación", image: media.partners.team },
+    { quote: "Desde la primera conversación entendí qué información necesitaba y cuáles eran los siguientes pasos.", name: "Nombre de ejemplo", detail: "Ejemplo temporal · No es un testimonio real", image: media.trust.call },
+    { quote: "Me ayudó tener una persona de contacto para entender las opciones y hablar con el centro.", name: "Nombre de ejemplo", detail: "Ejemplo temporal · No es un testimonio real", image: media.trust.documents },
+    { quote: "La información estaba explicada con calma y pude decidir sin sentir presión.", name: "Nombre de ejemplo", detail: "Ejemplo temporal · No es un testimonio real", image: media.partners.team },
   ],
   en: [
-    { quote: "From the first call, I understood what information I needed and what the next steps were.", name: "Example name", detail: "Patient from Spain · Testimonial pending approval", image: media.trust.call },
-    { quote: "Having one contact person made it easier to organise the journey and speak with the centre.", name: "Example name", detail: "International patient · Testimonial pending approval", image: media.trust.documents },
-    { quote: "The information was explained calmly, so I could decide without feeling pressured.", name: "Example name", detail: "Patient from Spain · Testimonial pending approval", image: media.partners.team },
+    { quote: "From the first conversation, I understood what information I needed and what the next steps were.", name: "Example name", detail: "Temporary example · Not a real patient testimonial", image: media.trust.call },
+    { quote: "Having one contact person made it easier to understand the options and speak with the centre.", name: "Example name", detail: "Temporary example · Not a real patient testimonial", image: media.trust.documents },
+    { quote: "The information was explained calmly, so I could decide without feeling pressured.", name: "Example name", detail: "Temporary example · Not a real patient testimonial", image: media.partners.team },
   ],
 } as const;
 

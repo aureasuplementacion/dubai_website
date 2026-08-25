@@ -48,8 +48,8 @@ export const bhtClinic: Clinic = {
     en: ["55,000 m² hospital across 19 floors", "20 operating rooms and intensive care units", "International patient centre", "More than 100 doctors and 1,000 staff members"],
   },
   included: {
-    es: ["Coordinador internacional", "Interpretación y comunicación con el centro", "Opciones de hotel y traslado privado según propuesta", "Apoyo 24/7 durante el proceso, según el servicio contratado"],
-    en: ["International coordinator", "Interpretation and communication with the centre", "Hotel and private transfer options according to the proposal", "24/7 support during the process, according to the contracted service"],
+    es: ["Unidad de pacientes internacionales del centro", "Interpretación y comunicación según disponibilidad del proveedor", "Información sobre hotel y traslado ofrecida por proveedores independientes", "Condiciones y apoyo confirmados directamente por el proveedor responsable"],
+    en: ["International patient unit at the centre", "Interpretation and communication subject to provider availability", "Information about hotel and transfer from independent providers", "Terms and support confirmed directly by the responsible provider"],
   },
   followUp: {
     es: "La valoración, el diagnóstico, la indicación y el seguimiento clínico corresponden al equipo sanitario responsable.",
