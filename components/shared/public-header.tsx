@@ -18,6 +18,7 @@ export function PublicHeader({ locale }: { locale: string }) {
   const links = [
     { href: `/${locale}/clinicas`, label: english ? "Clinics & professionals" : "Clínicas y profesionales" },
     { href: `/${locale}/como-funciona`, label: english ? "Your journey" : "Tu viaje" },
+    { href: `/${locale}/aura`, label: english ? "The Aura approach" : "Cómo funciona Aura" },
   ];
 
   return <header className="sticky top-0 z-40 border-b border-border/70 bg-canvas/90 backdrop-blur-xl">
@@ -42,6 +43,6 @@ export function PublicHeader({ locale }: { locale: string }) {
       </nav>
       <div className="flex items-center gap-2 lg:hidden"><Link href={`/${locale}/reservar`} className={buttonClassName("primary", "px-3 py-2 text-xs")}>{english ? "Talk to us" : "Hablar"}</Link><button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex size-11 items-center justify-center rounded-full border border-border text-sapphire" aria-expanded={open} aria-label={english ? "Open menu" : "Abrir menú"}>{open ? <X size={20} /> : <Menu size={20} />}</button></div>
     </div>
-    {open && <nav className="border-t border-border bg-canvas px-5 py-5 lg:hidden"><div className="container-shell grid gap-1"><Link href={`/${locale}/especialidades`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Specialties" : "Especialidades"}</Link><Link href={`/${locale}/clinicas`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Clinics & professionals" : "Clínicas y profesionales"}</Link><Link href={`/${locale}/como-funciona`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Your journey" : "Tu viaje"}</Link><Link href={`/${nextLocale}${pathname.replace(/^\/[^/]+/, "")}`} onClick={close} className="mt-3 rounded-xl border border-border px-3 py-3 text-sm font-bold uppercase tracking-[.16em] text-sapphire">{nextLocale}</Link></div></nav>}
+    {open && <nav className="border-t border-border bg-canvas px-5 py-5 lg:hidden"><div className="container-shell grid gap-1"><Link href={`/${locale}/especialidades`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Specialties" : "Especialidades"}</Link><Link href={`/${locale}/clinicas`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Clinics & professionals" : "Clínicas y profesionales"}</Link><Link href={`/${locale}/como-funciona`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "Your journey" : "Tu viaje"}</Link><Link href={`/${locale}/aura`} onClick={close} className="rounded-xl px-3 py-3 font-semibold text-sapphire">{english ? "The Aura approach" : "Cómo funciona Aura"}</Link><Link href={`/${nextLocale}${pathname.replace(/^\/[^/]+/, "")}`} onClick={close} className="mt-3 rounded-xl border border-border px-3 py-3 text-sm font-bold uppercase tracking-[.16em] text-sapphire">{nextLocale}</Link></div></nav>}
   </header>;
 }
