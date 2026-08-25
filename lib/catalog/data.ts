@@ -80,16 +80,6 @@ export const specialties: Specialty[] = [
     ],
   },
   {
-    slug: "oftalmologia",
-    name: { es: "Oftalmología", en: "Ophthalmology" },
-    shortDescription: { es: "Estudios visuales y opciones oftalmológicas coordinadas.", en: "Coordinated vision assessments and ophthalmology options." },
-    description: { es: "Te ayudamos a conocer opciones visuales y a preparar una primera conversación con el centro.", en: "We help you explore vision options and prepare an initial conversation with the clinic." },
-    services: [
-      { slug: "cirugia-refractiva", name: { es: "Cirugía refractiva", en: "Refractive surgery" }, description: { es: "LASIK, PRK o SMILE cuando las pruebas confirmen que son adecuadas.", en: "LASIK, PRK or SMILE when tests confirm suitability." }, options: [option("lasik", "LASIK", "LASIK", "Información sobre pruebas de elegibilidad y recuperación.", "Information about eligibility tests and recovery."), option("prk", "PRK", "PRK", "Alternativa láser que requiere valoración individual.", "Laser alternative requiring individual assessment."), option("smile", "SMILE", "SMILE", "Técnica disponible según indicación del centro.", "Technique available according to clinic indication.")] },
-      { slug: "cataratas-lentes", name: { es: "Cataratas y lentes intraoculares", en: "Cataracts and intraocular lenses" }, description: { es: "Valoración oftalmológica para conocer alternativas y recuperación.", en: "Ophthalmology assessment to understand options and recovery." }, options: [option("cirugia-cataratas", "Cirugía de cataratas", "Cataract surgery", "Información sobre estudio, procedimiento y seguimiento.", "Information about assessment, procedure and follow-up."), option("lentes-premium", "Lentes intraoculares", "Intraocular lenses", "Opciones a decidir con el equipo oftalmológico.", "Options to be decided with the ophthalmology team.")] },
-    ],
-  },
-  {
     slug: "fertilidad",
     name: { es: "Fertilidad y salud reproductiva", en: "Fertility and reproductive health" },
     shortDescription: { es: "Acompañamiento sensible para decisiones importantes.", en: "Sensitive support for important decisions." },
@@ -123,5 +113,5 @@ export const specialties: Specialty[] = [
 
 export function getSpecialty(slug: string) { return specialties.find((specialty) => specialty.slug === slug); }
 export function getSpecialtyService(specialtySlug: string, serviceSlug: string) { const specialty = getSpecialty(specialtySlug); const service = specialty?.services.find((item) => item.slug === serviceSlug); return service ? { ...service, specialty } : undefined; }
-export const publishedSpecialtySlugs = ["capilar", "odontologia", "estetica", "bariatrica", "oftalmologia"] as const;
+export const publishedSpecialtySlugs = ["capilar", "odontologia", "estetica", "bariatrica"] as const;
 export const publishedSpecialties = specialties.filter((specialty) => publishedSpecialtySlugs.includes(specialty.slug as (typeof publishedSpecialtySlugs)[number]));

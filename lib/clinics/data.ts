@@ -39,7 +39,7 @@ export const bhtClinic: Clinic = {
     es: "Hospital privado de referencia en Estambul con atención internacional y coordinación para pacientes que viajan desde España.",
     en: "A private hospital in Istanbul with international patient support and coordination for people travelling from Spain.",
   },
-  specialties: ["estetica", "bariatrica", "odontologia", "oftalmologia", "capilar"],
+  specialties: ["estetica", "bariatrica", "odontologia", "capilar"],
   languages: ["Español", "Inglés", "Turco"],
   internationalUnit: true,
   interpreter: true,
@@ -69,4 +69,4 @@ export const clinicSpecialties = bhtClinic.specialties;
 export function getClinic(slug: string) { return verifiedClinics.find((clinic) => clinic.slug === slug); }
 
 // Kept only to provide a controlled redirect from the former prototype routes.
-export const legacyClinicSlugs = ["bosporus-aesthetic-center", "golden-horn-dental", "istanbul-hair-institute", "antalya-wellness-hospital", "izmir-vision-clinic", "marmara-reproductive-center"];
+export const legacyClinicSlugs = ["bosporus-aesthetic-center", "golden-horn-dental", "istanbul-hair-institute", "antalya-wellness-hospital", "marmara-reproductive-center"];

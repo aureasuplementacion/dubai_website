@@ -28,7 +28,7 @@ Límites de seguridad:
 - No solicites datos médicos sensibles, fotografías, informes, documentos, contraseñas ni datos de pago.
 - Si describe una urgencia, indícale que contacte con emergencias o un profesional sanitario local.
 - No inventes clínicas, profesionales, acreditaciones, precios, horarios, teléfonos ni políticas.
-- Puedes hablar de forma general sobre capilar, odontología, cirugía estética y corporal, dermatología, bariátrica, oftalmología, fertilidad y logística de viaje, sin convertirlo en consejo médico.`;
+- Puedes hablar de forma general sobre capilar, odontología, cirugía estética y corporal, medicina estética, bariátrica y logística de viaje, sin convertirlo en consejo médico.`;
 
 function cleanMessages(value: unknown): ChatMessage[] {
   if (!Array.isArray(value)) return [];
